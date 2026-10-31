@@ -48,7 +48,7 @@ URL은 DNS와 공개 배포를 완료한 뒤 제출합니다. localhost 주소�
 
 1. 최종 스토어 앱 이름·개발자 표시명·연락처를 사이트와 맞춥니다.
 2. 광고·결제·분석·오류 수집 SDK를 최종 빌드에 추가했다면 데이터 보안 설문과 개인정보처리방침을 갱신합니다.
-3. 최종 호스팅 사업자, 수탁·국외 처리 구조 및 필요한 고지·동의 사항을 실제 계약에 맞게 확정합니다. 현재 방침은 OpenAI Sites / Cloudflare 검토용 호스팅을 표시합니다. Vercel 이전 시 반드시 해당 문구를 변경합니다.
+3. 최종 호스팅 사업자, 수탁·국외 처리 구조 및 필요한 고지·동의 사항을 실제 계약에 맞게 확정합니다. Next.js 전환 후 방침은 Vercel 호스팅을 표시합니다. 공개 서비스 주소는 실제 Vercel 배포와 도메인 연결 상태를 확인한 뒤 사용합니다.
 4. 고객지원 내역을 ‘완료 안내 후 30일 내 삭제’하는 운영 절차를 운영 메일함에도 적용합니다. 이것은 웹사이트에 새로 정한 운영 기준이며, 기존 메일함의 자동 정리 설정을 확인하거나 변경한 것은 아닙니다. 장기 보관이 필요하면 근거·대상·기간을 먼저 확정하고 방침을 수정합니다.
 5. 로그인 기록 60일 정리가 운영 중 계속 실행되는지 확인합니다. 현재 코드는 로그인 시 만료 기록을 정리합니다. 엄격한 정시 파기가 필요하면 정기 정리 작업을 운영합니다.
 6. **게임 내 개인정보처리방침 링크**를 설정 등 접근 가능한 곳에 넣습니다. 이 웹 작업에서는 게임 코드를 변경하지 않았으며, 현재 확인한 설정 화면에는 해당 링크가 없었습니다.
@@ -70,3 +70,10 @@ URL은 DNS와 공개 배포를 완료한 뒤 제출합니다. localhost 주소�
 OpenAI Sites로 계속 서비스한다면 같은 Site의 Custom Domain 기능이 반환하는 CNAME 대상만 사용합니다. 이 경우에도 Google Play 제출을 위해 전체 공개 접속이 필요합니다. 검토용 Site의 기본 비공개 상태를 이번 작업에서 변경하지 않았습니다.
 
 위 DNS·Vercel 프로젝트 생성·공개 전환은 아직 수행하지 않았습니다.
+
+
+## Next.js / Vercel 전환 (2026-10-31)
+
+현재 저장소 루트가 Next.js 앱 루트입니다. Vercel Import에서 Framework Preset은 Next.js, Root Directory는 `.`, 빌드·출력 경로는 기본값을 사용합니다. 이전 정적 사이트의 Output Directory `dist`를 재사용하지 않습니다. 환경변수 `SITE_URL`이 없으면 Vercel의 프로젝트 기본 운영 주소를 메타데이터와 sitemap에 사용합니다. 도메인 연결 후 `SITE_URL`을 변경하고 재배포합니다.
+
+공식 참고: [Next.js 배포](https://nextjs.org/docs/app/getting-started/deploying), [Vercel 시스템 환경변수](https://vercel.com/docs/environment-variables/system-environment-variables), [Vercel 개인정보처리방침](https://vercel.com/legal/privacy-notice).

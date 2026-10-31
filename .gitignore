@@ -4,3 +4,9 @@ node_modules/
 .openai/*.tgz
 .openai/local*
 qa/
+
+.next/
+.vercel/
+.env*
+!.env.example
+coverage/

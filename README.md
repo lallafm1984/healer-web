@@ -1,51 +1,74 @@
 # 나혼자 힐러 · Solo Healer
 
-포엘트리(4LTree)의 힐러 RPG 소개 및 고객지원 사이트. 외부 패키지 없이 Node.js로 정적 HTML을 생성합니다. 게임 저장 서버나 관리용 키를 포함하지 않습니다.
+포엘트리(4LTree)의 힐러 RPG 소개 및 고객지원 사이트입니다. Next.js 16 App Router와 React 19를 사용하며, 페이지를 빌드할 때 정적으로 미리 렌더링합니다.
 
-## 실행
+## 로컬 실행
 
-Node.js 22 이상. 의존성 설치 없이 실행합니다.
+Node.js 22 이상을 사용합니다.
+
+```sh
+npm ci
+npm run dev
+```
+
+미리보기: http://localhost:4326
 
 ```sh
 npm run build
 npm run check
-npm run dev
+npm run start
 ```
 
-로컬 주소: http://localhost:4326. 포트가 사용 중이면 `PORT=4327 npm run dev`와 같이 변경합니다.
+`check`는 빌드된 앱을 임시 포트에서 실행하여 페이지·내부 링크·메타데이터·보안 헤더·사이트맵·404를 검사한 뒤 종료합니다. 배포된 사이트는 `CHECK_BASE_URL=https://실제-주소 npm run check`로 검사할 수 있습니다.
 
-## 페이지
+## 페이지와 코드
 
-| 경로 | 내용 |
+| 경로 | 내용 | 파일 |
+| --- | --- | --- |
+| `/` | 게임 소개, 7개 직업 선택, 플레이 갤러리·확대, 출시 안내 | `app/page.jsx`, `components/home-experience.jsx` |
+| `/privacy/` | 개인정보 처리 안내 | `app/privacy/page.jsx` |
+| `/terms/` | 이용약관 | `app/terms/page.jsx` |
+| `/delete-account/` | 이메일 삭제 요청 및 요청문 작성 도우미 | `app/delete-account/page.jsx`, `components/deletion-composer.jsx` |
+| `/support/` | 운영 이메일, FAQ, 계정 관리 링크 | `app/support/page.jsx` |
+
+- `app/layout.jsx`: 공통 레이아웃, 한국어 설정, 폰트, 검색·공유 메타데이터.
+- `components/site-chrome.jsx`: 공통 탐색 메뉴, 모바일 메뉴, 푸터.
+- `components/use-landing-motion.js`: 배경 움직임, 스크롤 표시, 등장 효과와 정리 처리.
+- `lib/content.js`: 직업 데이터와 정책·약관 문안.
+- `app/globals.css`, `app/interactive.css`: 기존 디자인과 반응형 스타일.
+- `public/assets/`: 게임 그림·화면·아이콘·로컬 폰트 및 라이선스.
+- `app/robots.js`, `app/sitemap.js`: 검색 엔진용 경로.
+- `next.config.mjs`: 끝 슬래시와 보안 헤더.
+
+기존 정적 HTML 생성기와 OpenAI Sites 설정은 Next.js 전환 과정에서 제거했습니다. 과거 구현은 Git 이력에서 확인할 수 있습니다.
+
+## Vercel 배포
+
+GitHub의 `lallafm1984/healer-web` 저장소를 Import합니다.
+
+| 설정 | 값 |
 | --- | --- |
-| `/` | 성역 테마 소개, 7개 직업 선택, 실제 플레이 화면 확대, 출시 안내 |
-| `/privacy/` | 처리 정보·목적·제공자·보관·삭제·권리 행사 |
-| `/delete-account/` | 로그인·앱 재설치 없이 이메일 삭제 요청, 로컬 요청문 작성 도우미, 게임 내 삭제 안내 |
-| `/support/` | 운영 이메일, FAQ, 계정·개인정보 관리 링크 |
-| `/terms/` | 서비스 이용, 계정, 구매·환불, 탈퇴 안내 |
+| Framework Preset | Next.js |
+| Root Directory | `.` (저장소 루트) |
+| Install Command | 기본값 (`npm install` 또는 잠금 파일에 따른 설치) |
+| Build Command | 기본값 (`npm run build`) |
+| Output Directory | 기본값 (직접 `dist`로 지정하지 않음) |
+| Production Branch | `main` |
 
-`scripts/build.mjs`는 HTML과 sitemap, robots, 정적 호스팅 헤더를 만듭니다. 홈 구성은 `scripts/home.mjs`, 문안과 직업 데이터는 `scripts/content.mjs`, 기본 스타일·동작은 `dist/styles.css`, `dist/app.js`에서 편집합니다. 홈 전용 인터랙션은 `dist/interactive.css`, `dist/experience.js`에 있습니다. 빌드는 assets·CSS·JS를 지우지 않습니다.
+필수 비밀키나 환경변수는 없습니다. 기본 검색·공유 주소는 Vercel의 `VERCEL_PROJECT_PRODUCTION_URL`을 사용합니다. 로컬에서는 `http://localhost:4326`을 사용합니다.
 
-기본 메타데이터 주소는 `https://healer.4ltree.com`입니다. 다른 호스트에 배포할 때는 실제 주소로 빌드합니다.
+`healer.4ltree.com` 등 사용자 도메인을 연결한 뒤에는 Vercel의 프로젝트 환경변수에 `SITE_URL=https://healer.4ltree.com`을 설정하고 다시 배포합니다. `.env.example`에는 선택 설정 예시만 있으며, 비밀 정보는 저장소에 커밋하지 않습니다.
 
-```sh
-SITE_URL=https://실제-주소 npm run build
-```
+`main`에 새 커밋을 올리면 연결된 Vercel 프로젝트가 자동 배포합니다. 최초 Import 후 받은 공개 주소와 `/privacy/`, `/delete-account/`, `/support/`의 접근을 확인하십시오.
 
-## 실제 작동 범위
+## 실제 동작
 
-- 이메일 링크는 메일 작성 화면을 엽니다. 이용자가 보내기를 눌러야 접수됩니다. 서버에서 접수한 것처럼 성공 문구를 표시하지 않습니다.
-- 작성 도우미는 브라우저 메모리에서만 동작하며 제출 API·로그인·추적 스크립트·쿠키를 사용하지 않습니다. 이메일과 작성문을 복사하는 대체 경로를 제공합니다.
-- Google Play 배포 주소를 확인하지 않았으므로 다운로드 링크를 만들지 않고 출시 준비 상태를 표시합니다.
-- 웹사이트에서 게임 계정을 직접 삭제하지 않습니다. 게임에 구현된 삭제 경로와 운영자의 이메일 처리 경로를 제공합니다.
-- 모바일 메뉴, ARIA 직업 탭(방향키/Home/End), 접근 가능한 스크린샷 대화상자, FAQ, 모션 감소 설정을 지원합니다.
+- 직업·플레이 탭은 키보드 방향키, Home, End를 지원합니다. 갤러리 대화상자는 Esc로 닫습니다.
+- 모바일 메뉴, FAQ, 움직임 끄기와 시스템의 모션 줄이기 설정을 지원합니다.
+- 이메일 링크는 메일 작성 화면을 열며 이용자가 직접 전송해야 접수됩니다.
+- 삭제 요청 작성 내용은 브라우저 메모리에만 있으며 서버에 제출하거나 저장하지 않습니다.
+- 웹사이트에 로그인, 추적 분석, 광고 SDK, 결제 또는 게임 데이터베이스 연결을 추가하지 않았습니다.
+- 공개 Google Play 배포 주소를 아직 넣지 않았으므로 출시 준비 상태를 표시합니다.
+- 개인정보처리방침의 웹사이트 호스팅 제공자는 Vercel입니다.
 
-## 배포
-
-`dist/`를 공개 정적 호스팅에 배포하면 됩니다. Vercel은 `vercel.json`, OpenAI Sites는 `.openai/hosting.json`을 사용합니다. Sites의 검토용 비공개 게시와 Google Play 제출용 공개 주소는 구별해야 합니다.
-
-스크롤 등장·배경 반응, 직업별 장면 전환, 플레이 갤러리 개편의 조사 근거와 검증 기록은 [인터랙티브 개편](./docs/interactive-redesign.md)에 있습니다.
-
-개인정보처리방침의 호스팅 제공자 문구는 현재 검토용 OpenAI Sites / Cloudflare 기준입니다. 실제 서비스를 Vercel로 배포하면 해당 문구를 Vercel로 바꾸고 그 제공자의 데이터 처리·보관·국외 처리 조건을 확인한 뒤 다시 빌드하십시오.
-
-자세한 도메인·Play 등록 항목은 [등록 안내](./docs/google-play-and-domain.md), 그림 정보는 [에셋 안내](./docs/assets.md)에 있습니다.
+[Google Play·도메인 안내](./docs/google-play-and-domain.md) · [그림과 폰트 정보](./docs/assets.md) · [기존 디자인 검증 기록](./docs/interactive-redesign.md)

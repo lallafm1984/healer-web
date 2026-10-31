@@ -4,8 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "dev": "node scripts/serve.mjs",
+    "dev": "next dev --port 4326",
+    "build": "next build",
+    "start": "next start --port 4326",
     "check": "node scripts/check.mjs"
+  },
+  "dependencies": {
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }
