@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://solo-healer-4ltree.lallafm1984.chatgpt.site/sitemap.xml
