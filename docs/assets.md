@@ -20,7 +20,9 @@ Use case: stylized-concept. Asset type: panoramic official landing page backgrou
 - `emblem-{priest,druid,paladin,shaman,monk,astrologer,warder}.webp`: 실제 7개 직업의 게임 문양.
 - `scene-abbey-altar.webp`: 직업 소개의 배경.
 - `app-icon.png`: 게임 Android 런처 아이콘.
-- 실제 플레이 화면 3장: `나혼자힐러/리소스/스토어-후반플레이-S25-20261029/01_S25_원본/`의 `08_드루이드_별빛수정동굴_중간.png`, `21_후반장비_상세.png`, `06_후반_길드.png`. 가로 540px WebP로 최적화.
+- 실제 플레이 화면 3장: `나혼자힐러/리소스/스토어-후반플레이-S25-20261029/01_S25_원본/`의 `15_사제_만렙_멈춘심장_중간.png`, `21_후반장비_상세.png`, `06_후반_길드.png`. 가로 540px WebP로 최적화.
 - Hahmlet 700·800, Noto Sans KR 400·700: 게임에 포함된 로컬 WOFF2. 해당 OFL 라이선스를 `dist/assets/`에 함께 보관.
 
 외부 스톡 사진, 가짜 리뷰·다운로드 수·평점, 다른 게임 이미지는 사용하지 않았습니다.
+
+2026-10-31: 전투 화면은 사제로 통일했습니다. 홈 첫 화면·플레이 갤러리·확대 화면이 `screenshot-battle-priest.webp`를 공유합니다.
