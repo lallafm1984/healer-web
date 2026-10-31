@@ -24,5 +24,7 @@ for(const file of files.filter(f=>f.endsWith('.html'))){
   checks++;
  }
 }
-execFileSync(process.execPath,['--check',resolve(root,'app.js')]);
+for (const file of files.filter(f=>f.endsWith('.js'))) execFileSync(process.execPath,['--check',file]);
+const home = await readFile(resolve(root,'index.html'),'utf8');
+if (/개발 중|개발 빌드|일부 다를 수|소개 일러스트/.test(home)) throw Error('Pre-release development notice remains on landing page');
 console.log(`Passed: ${files.filter(f=>f.endsWith('.html')).length} HTML pages, ${checks} local references, metadata, unique IDs, anchors and JavaScript syntax.`);

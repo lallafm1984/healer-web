@@ -24,7 +24,7 @@ npm run dev
 | `/support/` | 운영 이메일, FAQ, 계정·개인정보 관리 링크 |
 | `/terms/` | 서비스 이용, 계정, 구매·환불, 탈퇴 안내 |
 
-`scripts/build.mjs`는 HTML과 sitemap, robots, 정적 호스팅 헤더를 만듭니다. 문안과 직업 데이터는 `scripts/content.mjs`, 스타일·브라우저 동작은 `dist/styles.css`, `dist/app.js`에서 편집합니다. 빌드는 assets·CSS·JS를 지우지 않습니다.
+`scripts/build.mjs`는 HTML과 sitemap, robots, 정적 호스팅 헤더를 만듭니다. 홈 구성은 `scripts/home.mjs`, 문안과 직업 데이터는 `scripts/content.mjs`, 기본 스타일·동작은 `dist/styles.css`, `dist/app.js`에서 편집합니다. 홈 전용 인터랙션은 `dist/interactive.css`, `dist/experience.js`에 있습니다. 빌드는 assets·CSS·JS를 지우지 않습니다.
 
 기본 메타데이터 주소는 `https://healer.4ltree.com`입니다. 다른 호스트에 배포할 때는 실제 주소로 빌드합니다.
 
@@ -43,6 +43,8 @@ SITE_URL=https://실제-주소 npm run build
 ## 배포
 
 `dist/`를 공개 정적 호스팅에 배포하면 됩니다. Vercel은 `vercel.json`, OpenAI Sites는 `.openai/hosting.json`을 사용합니다. Sites의 검토용 비공개 게시와 Google Play 제출용 공개 주소는 구별해야 합니다.
+
+스크롤 등장·배경 반응, 직업별 장면 전환, 플레이 갤러리 개편의 조사 근거와 검증 기록은 [인터랙티브 개편](./docs/interactive-redesign.md)에 있습니다.
 
 개인정보처리방침의 호스팅 제공자 문구는 현재 검토용 OpenAI Sites / Cloudflare 기준입니다. 실제 서비스를 Vercel로 배포하면 해당 문구를 Vercel로 바꾸고 그 제공자의 데이터 처리·보관·국외 처리 조건을 확인한 뒤 다시 빌드하십시오.
 

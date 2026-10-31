@@ -20,7 +20,8 @@
       t.classList.toggle('selected',selected);
       document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
     });
-    if(focus){tab.focus();tab.scrollIntoView({block:'nearest',inline:'nearest'});}
+    document.dispatchEvent(new CustomEvent('healer:classchange', { detail: { key: tab.dataset.class, index: tabs.indexOf(tab) } }));
+    if(focus){tab.focus({preventScroll:true});const list=tab.parentElement;list.scrollTo({left:tab.offsetLeft-list.offsetLeft-(list.clientWidth-tab.clientWidth)/2});}
   }
   tabs.forEach((tab,i) => {
     tab.addEventListener('click',()=>selectClass(tab));
