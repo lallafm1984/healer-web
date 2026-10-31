@@ -2,6 +2,8 @@
 
 포엘트리(4LTree)의 힐러 RPG 소개 및 고객지원 사이트입니다. Next.js 16 App Router와 React 19를 사용하며, 페이지를 빌드할 때 정적으로 미리 렌더링합니다.
 
+운영 주소: [https://healer.4ltree.com](https://healer.4ltree.com)
+
 ## 로컬 실행
 
 Node.js 24 LTS를 사용합니다. `.nvmrc`와 `package.json`에 같은 버전을 지정했습니다.
@@ -55,7 +57,7 @@ GitHub의 `lallafm1984/healer-web` 저장소를 Import합니다.
 | Output Directory | 기본값 (직접 `dist`로 지정하지 않음) |
 | Production Branch | `main` |
 
-필수 비밀키나 환경변수는 없습니다. 기본 검색·공유 주소는 Vercel의 `VERCEL_PROJECT_PRODUCTION_URL`을 사용합니다. 로컬에서는 `http://localhost:4326`을 사용합니다.
+필수 비밀키는 없습니다. 현재 Vercel Production에는 `SITE_URL=https://healer.4ltree.com`을 설정해 검색·공유 메타데이터와 사이트맵에 공식 도메인을 사용합니다. 환경변수가 없으면 Vercel의 `VERCEL_PROJECT_PRODUCTION_URL`, 로컬에서는 `http://localhost:4326`을 사용합니다.
 
 `healer.4ltree.com` 등 사용자 도메인을 연결한 뒤에는 Vercel의 프로젝트 환경변수에 `SITE_URL=https://healer.4ltree.com`을 설정하고 다시 배포합니다. `.env.example`에는 선택 설정 예시만 있으며, 비밀 정보는 저장소에 커밋하지 않습니다.
 

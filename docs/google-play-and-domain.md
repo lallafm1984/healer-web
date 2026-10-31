@@ -2,11 +2,11 @@
 
 검토일: 2026-10-31 (한국 시간)
 
-## 준비한 주소
+## 공식 서비스 주소
 
-`healer.4ltree.com`을 예정 서브도메인으로 사용합니다. 이 이름은 아직 DNS에 연결하지 않았습니다.
+`healer.4ltree.com`을 공식 서브도메인으로 사용합니다. 2026-10-31 가비아 DNS에 CNAME을 등록하고 Vercel의 `healer-web` 프로젝트 Production에 연결했습니다.
 
-| Play Console 항목 | 공개 서비스의 예정 값 |
+| Play Console 항목 | 공개 서비스 주소 |
 | --- | --- |
 | 개발자 웹사이트 | `https://healer.4ltree.com/` |
 | 개인정보처리방침 URL | `https://healer.4ltree.com/privacy/` |
