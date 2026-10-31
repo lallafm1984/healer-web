@@ -4,7 +4,7 @@
 
 ## 로컬 실행
 
-Node.js 22 이상을 사용합니다.
+Node.js 24 LTS를 사용합니다. `.nvmrc`와 `package.json`에 같은 버전을 지정했습니다.
 
 ```sh
 npm ci
