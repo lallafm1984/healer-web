@@ -75,7 +75,7 @@ export function useLandingMotion(heroRef, paused) {
       if (heroVisible && motionAllowed())
         hero.style.setProperty(
           "--hero-shift",
-          `${Math.min(70, Math.max(0, -hero.getBoundingClientRect().top) * (finePointer.matches ? 0.14 : 0.05))}px`,
+          `${Math.min(48, Math.max(0, -hero.getBoundingClientRect().top) * (finePointer.matches ? 0.1 : 0.035))}px`,
         );
       let active = "";
       for (const item of chapters) {

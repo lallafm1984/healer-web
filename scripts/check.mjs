@@ -76,7 +76,7 @@ try {
       "",
     );
     assert.equal((html.match(/<h1[ >]/g) || []).length, 1, `${route}: one h1`);
-    assert(html.includes('<html lang="ko">'), `${route}: document language`);
+    assert(/<html\b[^>]*\slang="ko"(?:\s|>)/.test(html), `${route}: document language`);
     for (const tag of [
       'name="description"',
       'rel="canonical"',

@@ -119,57 +119,33 @@ export default function HomeExperience() {
           alt=""
           aria-hidden="true"
         />
-        <div className="container hero-content">
-          <p className="eyebrow">
-            <span className="gold-line"></span> SOLO HEALER · HEALER RPG
-          </p>
-          <p className="hero-pretitle">모두가 용사가 될 때,</p>
-          <h1 id="hero-title">
-            나는 <em>힐러</em>가 된다.
-          </h1>
-          <p className="hero-description">
-            흔들리는 체력, 다가오는 일격.
-            <br />
-            당신의 치유로 이어지는 우리 파티의 모험.
-          </p>
-          <div className="hero-actions">
-            <a className="button gold" href="#classes">
-              나의 힐러 발견하기 <Arrow />
-            </a>
-            <a className="text-link" href="#gameplay">
-              전투 살펴보기 <Arrow />
-            </a>
+        <div className="container hero-layout">
+          <div className="hero-content">
+            <h1 id="hero-title">나는 <em>힐러</em>가 된다.</h1>
+            <p className="hero-pretitle">모두가 용사가 될 때,</p>
+            <p className="hero-description">
+              흔들리는 체력, 다가오는 일격.<br />{" "}
+              당신의 치유로 이어지는 우리 파티의 모험.
+            </p>
+            <div className="hero-actions">
+              <a className="button gold" href="#classes">나의 힐러 발견하기 <Arrow /></a>
+              <a className="text-link" href="#gameplay">전투 살펴보기 <Arrow /></a>
+            </div>
+            <div className="hero-meta">
+              <span>Android</span><i aria-hidden="true" /><span>싱글 플레이 RPG</span>
+              <i aria-hidden="true" /><span>Google Play 곧 출시</span>
+            </div>
           </div>
-          <div className="hero-meta">
-            <span>Android</span>
-            <i></i>
-            <span>싱글 플레이 RPG</span>
-            <i></i>
-            <span>Google Play 곧 출시</span>
-          </div>
+          <a className="hero-preview" href="#gameplay" aria-label="실제 전투 화면 살펴보기">
+            <div className="hero-phone">
+              <img src="/assets/screenshot-battle-priest.webp" width="540" height="1170" alt="사제 직업의 실제 전투 화면" />
+            </div>
+            <span className="hero-preview-caption">생명을 잇는 당신의 선택 <Arrow /></span>
+          </a>
         </div>
-        <a
-          className="hero-preview"
-          href="#gameplay"
-          aria-label="실제 전투 화면 살펴보기"
-        >
-          <span className="preview-eyebrow">A MOMENT TO HEAL</span>
-          <div className="hero-phone">
-            <img
-              src="/assets/screenshot-battle-priest.webp"
-              width="540"
-              height="1170"
-              alt="사제 직업의 실제 전투 화면"
-            />
-          </div>
-          <span className="hero-preview-caption">
-            <span>생명을 잇는 당신의 선택</span>
-            <Arrow />
-          </span>
-        </a>
         <div className="hero-bottom">
           <a href="#story" className="journey-link">
-            SCROLL TO EXPLORE <span>↓</span>
+            모험 둘러보기 <Arrow />
           </a>
           <button
             type="button"
@@ -188,25 +164,14 @@ export default function HomeExperience() {
       </section>
       <nav className="chapter-nav" aria-label="모험 둘러보기">
         <div className="container">
-          <a href="#story">
-            <span>01</span> 모험
-          </a>
-          <a href="#classes">
-            <span>02</span> 직업
-          </a>
-          <a href="#gameplay">
-            <span>03</span> 플레이
-          </a>
-          <a href="#release">
-            <span>04</span> 곧 출시
-          </a>
+          <a href="#story">모험</a><a href="#classes">직업</a>
+          <a href="#gameplay">플레이</a><a href="#release">곧 출시</a>
         </div>
       </nav>
       <section id="story" className="story section">
         <div className="container">
           <div className="section-intro reveal">
             <div>
-              <p className="eyebrow">01 / THE HEALER'S JOURNEY</p>
               <h2>
                 파티의 마지막 희망은
                 <br />
@@ -235,7 +200,6 @@ export default function HomeExperience() {
                 loading="lazy"
               />
               <div className="journey-card-body">
-                <span className="eyebrow">01 / BATTLE</span>
                 <h3>위기를 읽고, 생명을 잇다.</h3>
                 <p>
                   누구를 먼저 살릴지.
@@ -260,7 +224,6 @@ export default function HomeExperience() {
                 loading="lazy"
               />
               <div className="journey-card-body">
-                <span className="eyebrow">02 / GROWTH</span>
                 <h3>나만의 치유를 완성하다.</h3>
                 <p>
                   장비를 고르고 특성을 다듬습니다.
@@ -285,7 +248,6 @@ export default function HomeExperience() {
                 loading="lazy"
               />
               <div className="journey-card-body">
-                <span className="eyebrow">03 / COMPANIONS</span>
                 <h3>동료와 더 멀리 나아가다.</h3>
                 <p>
                   개성 있는 길드원을 육성하고
@@ -303,7 +265,6 @@ export default function HomeExperience() {
       <section id="classes" className="classes-section section">
         <div className="container">
           <div className="section-heading reveal">
-            <p className="eyebrow">02 / FIND YOUR CALLING</p>
             <h2>
               같은 치유, <em>일곱 가지 방식.</em>
             </h2>
@@ -366,9 +327,8 @@ export default function HomeExperience() {
                 />
                 <div className="class-world-shade" />
                 <div className="class-copy">
-                  <span className="class-english">{c.en}</span>
-                  <p className="class-tag">{c.tag}</p>
                   <h3>{c.name}</h3>
+                  <p className="class-tag">{c.tag}</p>
                   <p className="class-description">{c.text}</p>
                   <div className="class-details">
                     <span>
@@ -430,7 +390,6 @@ export default function HomeExperience() {
         <div className="container">
           <div className="section-intro reveal">
             <div>
-              <p className="eyebrow">03 / INSIDE THE ADVENTURE</p>
               <h2>
                 보는 순간부터,
                 <br />
@@ -467,7 +426,6 @@ export default function HomeExperience() {
                   )
                 }
               >
-                <span>{pad(i + 1)}</span>
                 {s.name}
               </button>
             ))}
@@ -491,7 +449,6 @@ export default function HomeExperience() {
                   loading="lazy"
                 />
                 <div className="showcase-copy">
-                  <p className="eyebrow">{s.en}</p>
                   <h3>
                     {s.title.split("\n").map((line, index) => (
                       <Fragment key={line}>
@@ -558,7 +515,6 @@ export default function HomeExperience() {
       <section className="support-band">
         <div className="container reveal">
           <div>
-            <p className="eyebrow">WE'RE HERE FOR YOU</p>
             <h2>모험 중 도움이 필요할 때.</h2>
             <p>게임 문의부터 계정과 개인정보 관리까지.</p>
           </div>
@@ -584,7 +540,6 @@ export default function HomeExperience() {
             alt="나혼자 힐러 앱 아이콘"
             loading="lazy"
           />
-          <p className="eyebrow">YOUR PARTY IS WAITING</p>
           <h2>
             당신의 치유가,
             <br />
@@ -620,7 +575,7 @@ export default function HomeExperience() {
           aria-label="확대 화면 닫기"
           onClick={() => dialogRef.current.close()}
         >
-          닫기 ×
+          닫기
         </button>
         <img
           id="dialog-image"

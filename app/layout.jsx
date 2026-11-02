@@ -32,7 +32,7 @@ export const metadata = {
 export const viewport = { themeColor: "#101e1e" };
 export default function RootLayout({ children }) {
   return (
-    <html lang="ko">
+    <html lang="ko" data-scroll-behavior="smooth">
       <head>
         <link
           rel="preload"

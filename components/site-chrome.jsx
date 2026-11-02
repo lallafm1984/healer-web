@@ -97,7 +97,7 @@ export default function SiteChrome({ children }) {
       <footer className="site-footer">
         <div className="container footer-main">
           <Link className="brand" href="/">
-            <span className="sun-mark">✦</span>
+            <img src="/assets/app-icon.png" width="40" height="40" alt="" />
             <span>
               나혼자 힐러<small>A GAME BY 4LTREE</small>
             </span>
