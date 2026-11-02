@@ -1,32 +1,33 @@
 import Link from "next/link";
 import { updated } from "../lib/content";
 import { Arrow } from "./icons";
-export default function LegalPage({ title, english, description, sections }) {
+import { getLocale } from "../lib/locale-server";
+export default async function LegalPage({ title, description, sections }) {
+  const { t, href } = await getLocale();
   return (
     <>
       <section className="page-top">
         <div className="container">
-          <Link className="breadcrumb" href="/">
-            나혼자 힐러 <Arrow />
+          <Link className="breadcrumb" href={href("/")}>
+            {t("나혼자 힐러")} <Arrow />
           </Link>
-          <p className="eyebrow">{english}</p>
           <h1>{title}</h1>
           <p>{description}</p>
-          <span className="updated">시행·최종 수정일 {updated}</span>
+          <span className="updated">{t("시행·최종 수정일")} {t(updated)}</span>
         </div>
       </section>
       <div className="container document-layout">
         <aside className="document-nav">
-          <span>이 페이지에서</span>
-          <nav aria-label="문서 목차">
+          <span>{t("이 페이지에서")}</span>
+          <nav aria-label={t("문서 목차")}>
             {sections.map(([id, heading]) => (
               <a href={`#${id}`} key={id}>
                 {heading}
               </a>
             ))}
           </nav>
-          <Link className="aside-help" href="/support/">
-            도움이 필요하십니까? <Arrow />
+          <Link className="aside-help" href={href("/support/")}>
+            {t("도움이 필요하십니까?")} <Arrow />
           </Link>
         </aside>
         <article className="document-body">

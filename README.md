@@ -1,6 +1,6 @@
 # 나혼자 힐러 · Solo Healer
 
-포엘트리(4LTree)의 힐러 RPG 소개 및 고객지원 사이트입니다. Next.js 16 App Router와 React 19를 사용하며, 페이지를 빌드할 때 정적으로 미리 렌더링합니다.
+포엘트리(4LTree)의 힐러 RPG 소개 및 고객지원 사이트입니다. Next.js 16 App Router와 React 19를 사용하며, 요청 언어에 맞춰 서버에서 한국어·영어·일본어 HTML을 렌더링합니다. robots와 사이트맵은 정적으로 제공합니다.
 
 운영 주소: [https://healer.4ltree.com](https://healer.4ltree.com)
 
@@ -17,11 +17,12 @@ npm run dev
 
 ```sh
 npm run build
+npm test
 npm run check
 npm run start
 ```
 
-`check`는 빌드된 앱을 임시 포트에서 실행하여 페이지·내부 링크·메타데이터·보안 헤더·사이트맵·404를 검사한 뒤 종료합니다. 배포된 사이트는 `CHECK_BASE_URL=https://실제-주소 npm run check`로 검사할 수 있습니다.
+`test`는 언어 우선순위·코드 판정·링크·정책 번역 구조·이메일 요청문을 검사합니다. `check`는 빌드된 앱을 임시 포트에서 실행하여 페이지·내부 링크·메타데이터·보안 헤더·사이트맵·404와 3개 언어의 15개 페이지, 초기 서버 언어·저장 언어 충돌·이메일 문안을 검사한 뒤 종료합니다. 배포된 사이트는 `CHECK_BASE_URL=https://실제-주소 npm run check`로 검사할 수 있습니다.
 
 ## 페이지와 코드
 
@@ -37,7 +38,10 @@ npm run start
 - `components/site-chrome.jsx`: 공통 탐색 메뉴, 모바일 메뉴, 푸터.
 - `components/use-landing-motion.js`: 배경 움직임, 스크롤 표시, 등장 효과와 정리 처리.
 - `lib/content.js`: 직업 데이터와 정책·약관 문안.
-- `app/globals.css`, `app/interactive.css`: 기존 디자인과 반응형 스타일.
+- `proxy.js`, `lib/locale.js`, `lib/locale-server.js`: URL → 저장 언어 → 브라우저 언어 순으로 요청 언어를 결정합니다.
+- `lib/messages.js`, `lib/legal-content.js`: 한국어·영어·일본어 UI·정책·약관 번역.
+- `components/locale-provider.jsx`, `components/language-switcher.jsx`: 서버와 클라이언트의 같은 언어, 언어 변경 링크.
+- `app/globals.css`, `app/interactive.css`, `app/localization.css`: 기존 디자인과 번역 길이를 고려한 반응형 스타일.
 - `public/assets/`: 게임 그림·화면·아이콘·로컬 폰트 및 라이선스.
 - `app/robots.js`, `app/sitemap.js`: 검색 엔진용 경로.
 - `next.config.mjs`: 끝 슬래시와 보안 헤더.
@@ -72,5 +76,10 @@ GitHub의 `lallafm1984/healer-web` 저장소를 Import합니다.
 - 웹사이트에 로그인, 추적 분석, 광고 SDK, 결제 또는 게임 데이터베이스 연결을 추가하지 않았습니다.
 - 공개 Google Play 배포 주소를 아직 넣지 않았으므로 출시 준비 상태를 표시합니다.
 - 개인정보처리방침의 웹사이트 호스팅 제공자는 Vercel입니다.
+- 앱은 `/privacy/?lang=ja`처럼 기존 경로에 `lang=ko|en|ja`를 전달합니다. 유효한 URL 언어가 저장된 웹 언어보다 우선하며, 페이지 내부 이동에서도 유지합니다.
+- 직접 선택한 웹 언어는 언어 코드만 담은 기능성 쿠키로 최대 180일 기억합니다. URL·저장 선택이 없으면 브라우저의 첫 번째 언어가 한국어·일본어일 때 해당 언어, 나머지는 영어를 표시합니다.
+- 영어·일본어 홈은 실제 해당 언어로 실행해 캡처한 사제·장비·길드 화면을 사용합니다.
 
 [Google Play·도메인 안내](./docs/google-play-and-domain.md) · [그림과 폰트 정보](./docs/assets.md) · [기존 디자인 검증 기록](./docs/interactive-redesign.md)
+
+[앱과 웹의 언어 전달 계약·검증](./docs/app-language-contract.md)

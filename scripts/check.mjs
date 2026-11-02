@@ -12,7 +12,7 @@ async function read(url) {
   if (!cache.has(url))
     cache.set(
       url,
-      fetch(url).then(async (response) => ({
+      fetch(url, { headers: { "Accept-Language": "ko-KR" } }).then(async (response) => ({
         status: response.status,
         headers: response.headers,
         body: await response.text(),
@@ -125,8 +125,46 @@ try {
   assert.equal(missing.status, 404);
   assert(missing.body.includes("길을 잠시 벗어났습니다."));
   assert(missing.body.includes("noindex"));
+  let localizedPages = 0;
+  for (const lang of ["ko", "en", "ja"]) {
+    for (const route of routes) {
+      const url = new URL(route, baseUrl);
+      url.searchParams.set("lang", lang);
+      const response = await fetch(url, { headers: {
+        "Accept-Language": "fr-FR", Cookie: `healer-web.lang=${lang === "ko" ? "ja" : "ko"}`,
+        "x-healer-web-language": lang === "ja" ? "ko" : "ja",
+      } });
+      const html = (await response.text()).replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
+      assert.equal(response.status, 200, `${route} ${lang}`);
+      assert.equal(response.headers.get("content-language"), lang);
+      assert(new RegExp(`<html\\b[^>]*\\slang="${lang}"(?:\\s|>)`).test(html), `${route}: initial HTML ${lang}`);
+      assert(response.headers.get("set-cookie")?.includes(`healer-web.lang=${lang}`), "app choice updates saved web language");
+      if (lang !== "ko") {
+        const withoutNativeLanguageName = html.replace(/<a\b[^>]*\slang="ko"[^>]*>[\s\S]*?<\/a>/g, "");
+        assert(!/[가-힣]/.test(withoutNativeLanguageName), `${route}: untranslated Korean in ${lang}`);
+      }
+      for (const [tag] of html.matchAll(/<a\b[^>]*>/g)) {
+        const path = tag.match(/\shref="(\/[^\"]*)"/)?.[1];
+        if (!path || path.startsWith("/assets/")) continue;
+        // Language-switch links intentionally target a different language.
+        if (/href[Ll]ang=/.test(tag)) continue;
+        assert.equal(new URL(path.replaceAll("&amp;", "&"), baseUrl).searchParams.get("lang"), lang, `${route}: ${path}`);
+      }
+      if (route === "/delete-account/") {
+        for (const [, address] of html.matchAll(/href="(mailto:[^\"]*)"/g)) {
+          const mail = new URL(address.replaceAll("&amp;", "&"));
+          if (lang !== "ko") assert(!/[가-힣]/.test((mail.searchParams.get("subject") || "") + (mail.searchParams.get("body") || "")));
+        }
+      }
+      localizedPages++;
+    }
+  }
+  for (const [cookie, browser, expected] of [["ja", "ko-KR", "ja"], ["broken", "kok-IN", "en"], ["", "fr-FR,ja;q=0.8", "en"], ["", "ja-JP", "ja"], ["", "ko-KR", "ko"]]) {
+    const response = await fetch(new URL("/privacy/?lang=invalid", baseUrl), { headers: { Cookie: `healer-web.lang=${cookie}`, "Accept-Language": browser } });
+    assert.equal(response.headers.get("content-language"), expected, "invalid query uses saved or primary browser language");
+  }
   console.log(
-    `Passed: ${routes.length} pages, ${references} local references, SEO metadata, security headers, sitemap, robots and custom 404.`,
+    `Passed: ${routes.length} pages, ${references} local references, SEO, security, sitemap, 404; ${localizedPages} localized pages, query priority, fallback, internal links and email drafts.`,
   );
 } finally {
   if (server && server.exitCode === null) {

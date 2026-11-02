@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "./locale-provider";
 
 export default function CopyButton({
   value,
@@ -7,6 +8,7 @@ export default function CopyButton({
   className = "copy-button",
 }) {
   const [message, setMessage] = useState("");
+  const { t } = useLocale();
   const timer = useRef(null);
   useEffect(() => () => clearTimeout(timer.current), []);
   async function copy() {
@@ -24,14 +26,14 @@ export default function CopyButton({
   return (
     <>
       <button className={className} type="button" onClick={copy}>
-        {children}
+        {typeof children === "string" ? t(children) : children}
       </button>
       <span
         className={`toast${message ? " visible" : ""}`}
         role="status"
         aria-live="polite"
       >
-        {message}
+        {t(message)}
       </span>
     </>
   );

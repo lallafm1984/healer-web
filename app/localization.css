@@ -1,0 +1,36 @@
+/* Language controls and readable support documents across ko/en/ja. */
+.locale-switcher {display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-block:12px}
+.locale-switcher a {display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border:1px solid transparent;border-radius:4px;color:#cbd8c4;font-size:14px;line-height:1.7}
+.locale-switcher a[aria-current] {color:#f0d8a4;border-color:#adac7a}
+.locale-switcher a:hover {color:#f2d6a0;background:#e3c48c0c}
+.mobile-menu .locale-switcher {border-top:1px solid #76896954;margin-top:10px}
+.mobile-menu .locale-switcher a {padding:8px 14px}
+html:lang(en) body,html:lang(ja) body {word-break:normal}
+html:lang(ja) {--serif:'Hahmlet','Hiragino Mincho ProN','Yu Mincho',serif;--sans:Noto,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif}
+html:lang(en) .landing .hero h1 {max-width:15ch}
+.landing .hero h1 em {display:inline-block}
+.site-footer .footer-links a {display:inline-flex;align-items:center;min-height:44px;font-size:14px}
+.site-footer .footer-bottom {font-size:12px;line-height:1.9}
+.page-top h1 {overflow-wrap:break-word}
+.document-layout>*,.deletion-layout>*,.support-content>* {min-width:0}
+.document-body {font-size:16px;line-height:1.95}
+.document-body h2 {font-size:24px;line-height:1.6}
+.document-body :is(td,th) {font-size:14px;line-height:1.8;overflow-wrap:anywhere}
+.document-nav nav a,.aside-help {font-size:14px}
+.request-card p,.info-panel p,.numbered-steps li,.support-contact p:not(.eyebrow),.support-quicklinks p,.faq details>p {font-size:16px;line-height:1.9}
+.info-panel h3,.faq summary {font-size:16px}
+.request-card .form-note,.composer .sensitive-note,.support-fineprint,.operator-note,.updated {font-size:12px;line-height:1.9}
+.copy-button {min-height:44px;font-size:14px}
+.composer label {font-size:15px}
+.composer :is(input,select,textarea) {font-size:16px}
+.composer textarea[readonly] {font-size:14px}
+.page-top p:not(.eyebrow) {font-size:16px;line-height:1.9}
+@media(max-width:600px) {
+  html:lang(en) .landing .class-tabs {grid-template-columns:repeat(3,minmax(0,1fr))}
+  html:lang(en) .landing .hero h1 {font-size:38px}
+  .document-body h2 {font-size:21px}
+  .document-body :is(td,th) {font-size:13px;padding:10px 8px}
+  .request-card .button,.contact-actions .button {font-size:14px;min-height:48px}
+  .support-email,.request-card .email-display {font-size:14px;overflow-wrap:anywhere}
+  .info-panel h2,.request-card h2 {font-size:22px}
+}
