@@ -11,6 +11,16 @@ export default function SiteChrome({ children }) {
   const header = useRef(null);
   const toggle = useRef(null);
   const landing = pathname === "/";
+  function goHome(event) {
+    setMenuOpen(false);
+    if (!landing || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
+    event.preventDefault();
+    if (location.hash) history.pushState(null, "", "/");
+    window.scrollTo({
+      top: 0,
+      behavior: document.documentElement.classList.contains("motion-off") ? "instant" : "smooth",
+    });
+  }
   useEffect(() => {
     function onKey(event) {
       if (event.key === "Escape" && menuOpen) {
@@ -39,7 +49,7 @@ export default function SiteChrome({ children }) {
             href="/"
             className="brand"
             aria-label="나혼자 힐러 홈"
-            onClick={() => setMenuOpen(false)}
+            onClick={goHome}
           >
             <img src="/assets/app-icon.png" width="40" height="40" alt="" />
             <span>
@@ -96,7 +106,7 @@ export default function SiteChrome({ children }) {
       <main id="main">{children}</main>
       <footer className="site-footer">
         <div className="container footer-main">
-          <Link className="brand" href="/">
+          <Link className="brand" href="/" onClick={goHome}>
             <img src="/assets/app-icon.png" width="40" height="40" alt="" />
             <span>
               나혼자 힐러<small>A GAME BY 4LTREE</small>

@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { classes } from "../lib/content";
-import { Arrow } from "./icons";
+import { Arrow, Expand } from "./icons";
 import { useLandingMotion } from "./use-landing-motion";
 const themes = {
   priest: { scene: "abbey-altar", color: "#e2c382", label: "성역의 빛" },
@@ -68,9 +68,14 @@ export default function HomeExperience() {
   const classTabs = useRef([]);
   const sceneTabs = useRef([]);
   const dialogRef = useRef(null);
+  const dialogMedia = useRef(null);
+  const returnFocus = useRef(null);
   const heroRef = useRef(null);
   const reducedMotion = useLandingMotion(heroRef, paused);
   useEffect(() => () => document.body.classList.remove("dialog-open"), []);
+  useEffect(() => {
+    dialogMedia.current?.scrollTo({ top: 0, behavior: "instant" });
+  }, [sceneIndex]);
   function selectClass(index, focus = false) {
     const next = wrap(index, classes.length);
     setClassIndex(next);
@@ -92,10 +97,20 @@ export default function HomeExperience() {
     setSceneIndex(next);
     if (focus) sceneTabs.current[next]?.focus({ preventScroll: true });
   }
-  function openScreenshot(index) {
+  function openScreenshot(index, trigger) {
+    returnFocus.current = trigger;
     selectScene(index);
     dialogRef.current.showModal();
+    dialogMedia.current?.scrollTo({ top: 0, behavior: "instant" });
     document.body.classList.add("dialog-open");
+  }
+  function restoreScreenshotFocus() {
+    document.body.classList.remove("dialog-open");
+    const trigger = returnFocus.current;
+    const target = trigger?.isConnected && trigger.getClientRects().length
+      ? trigger
+      : sceneTabs.current[sceneIndex];
+    target?.focus({ preventScroll: true });
   }
   return (
     <>
@@ -136,12 +151,18 @@ export default function HomeExperience() {
               <i aria-hidden="true" /><span>Google Play 곧 출시</span>
             </div>
           </div>
-          <a className="hero-preview" href="#gameplay" aria-label="실제 전투 화면 살펴보기">
-            <div className="hero-phone">
+          <button
+            className="hero-preview"
+            type="button"
+            aria-label="사제 전투 화면 확대"
+            aria-haspopup="dialog"
+            onClick={(event) => openScreenshot(0, event.currentTarget)}
+          >
+            <span className="hero-phone">
               <img src="/assets/screenshot-battle-priest.webp" width="540" height="1170" alt="사제 직업의 실제 전투 화면" />
-            </div>
-            <span className="hero-preview-caption">생명을 잇는 당신의 선택 <Arrow /></span>
-          </a>
+            </span>
+            <span className="hero-preview-caption">전투 화면 확대 <Expand /></span>
+          </button>
         </div>
         <div className="hero-bottom">
           <a href="#story" className="journey-link">
@@ -462,15 +483,17 @@ export default function HomeExperience() {
                   <button
                     className="button outline"
                     type="button"
-                    onClick={() => openScreenshot(i)}
+                    aria-haspopup="dialog"
+                    onClick={(event) => openScreenshot(i, event.currentTarget)}
                   >
-                    플레이 화면 확대 <Arrow />
+                    플레이 화면 확대 <Expand />
                   </button>
                 </div>
                 <button
                   className="showcase-screen"
                   type="button"
-                  onClick={() => openScreenshot(i)}
+                  aria-haspopup="dialog"
+                  onClick={(event) => openScreenshot(i, event.currentTarget)}
                   aria-label={`${s.name} 플레이 화면 크게 보기`}
                 >
                   <div className="phone-frame">
@@ -483,7 +506,7 @@ export default function HomeExperience() {
                     />
                   </div>
                   <span>
-                    화면 확대 <Arrow />
+                    화면 확대 <Expand />
                   </span>
                 </button>
               </div>
@@ -557,11 +580,11 @@ export default function HomeExperience() {
       <dialog
         ref={dialogRef}
         id="screenshot-dialog"
-        aria-label="실제 게임 화면 확대"
+        aria-labelledby="lightbox-title"
         onClick={(event) => {
           if (event.target === event.currentTarget) dialogRef.current.close();
         }}
-        onClose={() => document.body.classList.remove("dialog-open")}
+        onClose={restoreScreenshotFocus}
         onKeyDown={(event) => {
           if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
             event.preventDefault();
@@ -569,21 +592,26 @@ export default function HomeExperience() {
           }
         }}
       >
-        <button
-          className="dialog-close"
-          type="button"
-          aria-label="확대 화면 닫기"
-          onClick={() => dialogRef.current.close()}
-        >
-          닫기
-        </button>
-        <img
-          id="dialog-image"
-          src={screenshot(scenes[sceneIndex])}
-          alt={scenes[sceneIndex].alt}
-          width="540"
-          height="1170"
-        />
+        <div className="lightbox-header">
+          <h2 id="lightbox-title">{scenes[sceneIndex].name} 화면</h2>
+          <button
+            className="dialog-close"
+            type="button"
+            aria-label="확대 화면 닫기"
+            onClick={() => dialogRef.current.close()}
+          >
+            닫기
+          </button>
+        </div>
+        <div className="lightbox-media" ref={dialogMedia} tabIndex={0} role="region" aria-label="게임 화면 이미지">
+          <img
+            id="dialog-image"
+            src={screenshot(scenes[sceneIndex])}
+            alt={scenes[sceneIndex].alt}
+            width="540"
+            height="1170"
+          />
+        </div>
         <div className="lightbox-navigation">
           <button
             type="button"
@@ -592,7 +620,7 @@ export default function HomeExperience() {
           >
             이전
           </button>
-          <span id="lightbox-count">{pad(sceneIndex + 1)} / 03</span>
+          <span id="lightbox-count" aria-live="polite">{pad(sceneIndex + 1)} / 03</span>
           <button
             type="button"
             onClick={() => selectScene(sceneIndex + 1)}

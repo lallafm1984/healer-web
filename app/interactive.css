@@ -8,7 +8,7 @@
 .landing .container {max-width:1200px;width:calc(100% - 96px)}
 .landing :is(h1,h2,h3) {text-wrap:balance;letter-spacing:-.025em}
 .landing p {text-wrap:pretty}
-html:has(.landing) {scrollbar-color:#97a778 #101e1e;caret-color:#e3c48c}
+html:has(.landing) {scrollbar-color:#97a778 #101e1e;scrollbar-gutter:stable;caret-color:#e3c48c}
 .landing .section-heading h2 em {display:inline-block}
 .landing :focus-visible {outline:2px solid #f2d6a0;outline-offset:5px}
 .landing :is(button,a) {touch-action:manipulation}
@@ -47,9 +47,9 @@ html:has(.landing) {scrollbar-color:#97a778 #101e1e;caret-color:#e3c48c}
 .landing .hero-actions .button>svg:last-child {margin:0;width:20px;height:20px}
 .landing .hero-meta {display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;margin:24px 0 0;font-size:12px;line-height:1.8;color:#cbd8c4}
 .landing .hero-meta i {width:3px;height:3px;background:#d5bb83;border-radius:50%}
-.landing .hero-preview {display:flex;position:relative;inset:auto;width:100%;flex-direction:column;align-items:center;z-index:2;transform:translate3d(calc(var(--pointer-x,0px) * -.35),calc(var(--pointer-y,0px) * -.35),0);transition:transform .5s var(--motion-ease)}
+.landing .hero-preview {display:flex;position:relative;inset:auto;width:100%;flex-direction:column;align-items:center;z-index:2;padding:0;border:0;background:transparent;color:inherit;text-align:center;cursor:zoom-in;transform:translate3d(calc(var(--pointer-x,0px) * -.35),calc(var(--pointer-y,0px) * -.35),0);transition:transform .5s var(--motion-ease)}
 .landing .hero-phone {width:238px;max-width:100%;overflow:hidden;border:6px solid #0a1716;border-radius:24px;box-shadow:14px 25px 50px #06110e66;transform:rotate(2deg);transition:transform .4s var(--motion-ease)}
-.landing .hero-preview:hover .hero-phone {transform:rotate(0) translateY(-4px)}
+.landing .hero-preview:is(:hover,:focus-visible) .hero-phone {transform:rotate(0) translateY(-4px)}
 .landing .hero-phone img {width:100%;height:auto}
 .landing .hero-preview-caption {display:flex;align-items:center;gap:12px;min-height:44px;margin-top:18px;font-size:13px;line-height:1.7;color:#f0e9d3}
 .landing .hero-preview-caption svg {width:18px;height:18px;color:var(--gold)}
@@ -147,11 +147,18 @@ html:has(.landing) {scrollbar-color:#97a778 #101e1e;caret-color:#e3c48c}
 .landing .release-pill {display:flex;align-items:center;gap:10px;border:1px solid #adac7a;border-radius:4px;padding:13px 24px;font-size:15px;margin-top:25px;color:#ead3a0}
 .landing .status-dot {box-shadow:none}
 .landing .release .text-link {margin-top:22px}
-.landing .lightbox-navigation {position:sticky;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 8px 4px;margin-top:12px;background:#0a1714;font-variant-numeric:tabular-nums}
+.landing dialog {width:min(620px,calc(100vw - 32px));height:min(900px,calc(100svh - 32px));height:min(900px,calc(100dvh - 32px));max-width:none;max-height:none;margin:auto;padding:0;border-radius:12px;overflow:hidden;background:#0b1c19}
+.landing dialog[open] {display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.landing .lightbox-header {display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 20px;background:#173026;border-bottom:1px solid #76896954}
+.landing .lightbox-header h2 {font-size:20px;line-height:1.6;margin:0}
+.landing .dialog-close {position:static;float:none;min-width:64px;min-height:44px;margin:0;padding:9px 16px;font-size:14px;line-height:1.6;background:transparent;border:1px solid #adad80}
+.landing .dialog-close:hover {background:#2b4433;border-color:#ecd19a}
+.landing .lightbox-media {min-height:0;overflow:auto;overflow-anchor:none;overscroll-behavior:contain;scrollbar-gutter:stable;padding:20px;scrollbar-color:#97a778 #0b1c19}
+.landing .lightbox-media:focus-visible {outline-offset:-5px}
+.landing .lightbox-media img {width:100%;max-width:540px;height:auto;margin-inline:auto}
+.landing .lightbox-navigation {position:static;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 20px;margin:0;background:#173026;border-top:1px solid #76896954;font-variant-numeric:tabular-nums}
 .landing .lightbox-navigation>span {font-size:14px;color:#e7d3a0}
 .landing .lightbox-navigation button {min-height:44px;min-width:66px;padding:9px 18px;border:1px solid #adad80;border-radius:4px;background:#173026;color:#eddbb4;font-size:14px}
-.landing .dialog-close {min-height:44px;font-size:14px;padding:10px 20px;margin-top:-43px;margin-bottom:12px}
-.landing dialog {padding-top:56px;border-radius:12px}
 .landing .site-footer {padding-top:44px}
 .landing .footer-main {gap:36px;padding-bottom:28px}
 .landing .footer-links {gap:16px 24px}
@@ -238,8 +245,8 @@ html.motion-off {scroll-behavior:auto}
   .landing .hero-meta{grid-column:1 / -1;grid-row:5;gap:6px 9px;margin:10px 0 0;font-size:12px;line-height:1.9}
   .landing .hero-preview{grid-column:2;grid-row:3 / span 2;width:116px;justify-self:end;align-self:center;transform:none}
   .landing .hero-phone{width:116px;border-width:3px;border-radius:13px;transform:none;box-shadow:7px 12px 26px #071a1259}
-  .landing .hero-preview-caption{width:100%;font-size:12px;line-height:1.6;margin-top:12px;text-align:center;justify-content:center}
-  .landing .hero-preview-caption svg{display:none}
+  .landing .hero-preview-caption{width:100%;font-size:12px;line-height:1.6;margin-top:12px;gap:8px;text-align:center;justify-content:center}
+  .landing .hero-preview-caption svg{display:block;width:16px;height:16px}
   .landing .hero-art{object-position:84% 50%;opacity:.72}
   .landing .hero-shade{background:linear-gradient(90deg,#0d2926eb,#102c26ba 62%,#0d261d70),linear-gradient(0deg,#101c1d,transparent 40%)}
   .landing .hero-bloom{display:none}
@@ -262,8 +269,9 @@ html.motion-off {scroll-behavior:auto}
   .landing .journey-card-link{font-size:14px}
   .landing .section-heading{margin-bottom:28px}
   .landing .section-heading>p:last-child{font-size:16px;margin-top:16px}
-  .landing .class-tab{flex:0 0 80px;min-width:80px;min-height:92px;font-size:14px;padding:12px 8px 16px}
-  .landing .class-tab img{width:36px;height:36px}
+  .landing .class-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible}
+  .landing .class-tab{min-width:0;min-height:84px;font-size:14px;padding:12px 4px;gap:6px}
+  .landing .class-tab img{width:32px;height:32px}
   .landing .class-panel{min-height:470px;grid-template-columns:minmax(0,1fr) 80px;align-items:start;gap:12px 16px;padding:28px 22px 100px}
   .landing .class-copy{display:contents}
   .landing .class-copy h3{grid-column:1;grid-row:1;font-size:36px;margin:0;line-height:1.4}
@@ -303,6 +311,9 @@ html.motion-off {scroll-behavior:auto}
   .landing .footer-links a{font-size:13px}
   .landing .footer-bottom{align-items:flex-start;font-size:12px;gap:4px}
   .landing .lightbox-navigation button{min-height:44px}
+  .landing .lightbox-header,.landing .lightbox-navigation{padding:10px 14px;gap:12px}
+  .landing .lightbox-header h2{font-size:18px}
+  .landing .lightbox-media{padding:14px}
 }
 @media(prefers-reduced-motion:reduce) {
   .landing *,.landing *::before,.landing *::after{animation:none!important;transition:none!important}
