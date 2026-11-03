@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { email } from "../lib/content";
+import { googlePlayHref } from "../lib/game";
 import { Arrow } from "./icons";
 import { useLocale } from "./locale-provider";
 import LanguageSwitcher from "./language-switcher";
@@ -13,7 +14,7 @@ export default function SiteChrome({ children }) {
   const header = useRef(null);
   const toggle = useRef(null);
   const landing = pathname === "/";
-  const { t, href } = useLocale();
+  const { lang, t, href } = useLocale();
   function goHome(event) {
     setMenuOpen(false);
     if (!landing || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
@@ -72,9 +73,9 @@ export default function SiteChrome({ children }) {
               {t("고객지원")}
             </Link>
           </nav>
-          <Link className="nav-cta" href={href("/#release")}>
-            {t("출시 안내")} <Arrow />
-          </Link>
+          <a className="nav-cta" href={googlePlayHref(lang)}>
+            {t("다운로드")} <Arrow />
+          </a>
           <button
             ref={toggle}
             className="menu-toggle"
@@ -101,6 +102,7 @@ export default function SiteChrome({ children }) {
           <Link href={href("/#classes")}>{t("7가지 직업")}</Link>
           <Link href={href("/#gameplay")}>{t("플레이")}</Link>
           <Link href={href("/support/")}>{t("고객지원")}</Link>
+          <a href={googlePlayHref(lang)}>{t("Google Play에서 다운로드")}</a>
           <Link href={href("/privacy/")}>{t("개인정보처리방침")}</Link>
           <LanguageSwitcher />
         </nav>
@@ -116,6 +118,7 @@ export default function SiteChrome({ children }) {
             </span>
           </Link>
           <div className="footer-links">
+            <a href={googlePlayHref(lang)}>Google Play</a>
             <Link href={href("/privacy/")}>{t("개인정보처리방침")}</Link>
             <Link href={href("/terms/")}>{t("이용약관")}</Link>
             <Link href={href("/support/")}>{t("고객지원")}</Link>

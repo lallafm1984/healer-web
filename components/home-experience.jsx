@@ -1,6 +1,7 @@
 "use client";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { classes } from "../lib/content";
+import { googlePlayHref } from "../lib/game";
 import { Arrow, Expand } from "./icons";
 import { useLandingMotion } from "./use-landing-motion";
 import { useLocale } from "./locale-provider";
@@ -146,12 +147,12 @@ export default function HomeExperience() {
               {t("당신의 치유로 이어지는 우리 파티의 모험.")}
             </p>
             <div className="hero-actions">
-              <a className="button gold" href="#classes">{t("나의 힐러 발견하기")} <Arrow /></a>
+              <a className="button gold" href={googlePlayHref(lang)}>{t("Google Play에서 다운로드")} <Arrow /></a>
               <a className="text-link" href="#gameplay">{t("전투 살펴보기")} <Arrow /></a>
             </div>
             <div className="hero-meta">
               <span>Android</span><i aria-hidden="true" /><span>{t("싱글 플레이 RPG")}</span>
-              <i aria-hidden="true" /><span>{t("Google Play 곧 출시")}</span>
+              <i aria-hidden="true" /><span>{t("Google Play 정식 출시")}</span>
             </div>
           </div>
           <button
@@ -189,7 +190,7 @@ export default function HomeExperience() {
       <nav className="chapter-nav" aria-label={t("모험 둘러보기")}>
         <div className="container">
           <a href="#story">{t("모험")}</a><a href="#classes">{t("직업")}</a>
-          <a href="#gameplay">{t("플레이")}</a><a href="#release">{t("곧 출시")}</a>
+          <a href="#gameplay">{t("플레이")}</a><a href="#release">{t("다운로드")}</a>
         </div>
       </nav>
       <section id="story" className="story section">
@@ -571,10 +572,12 @@ export default function HomeExperience() {
             <br />
             <em>{t("모험의 시작.")}</em>
           </h2>
-          <p>{t("나혼자 힐러 · Solo Healer")}</p>
-          <div className="release-pill">
-            <span className="status-dot"></span> {t("Google Play · 곧 출시")}
-          </div>
+          <p>{t("나혼자 힐러: 던전 레이드 RPG")}</p>
+          <p className="release-description">{t("혼자서 파티의 힐러가 되어 탐험과 던전, 레이드에 도전하세요.")}</p>
+          <a className="button gold release-download" href={googlePlayHref(lang)}>
+            {t("Google Play에서 다운로드")} <Arrow />
+          </a>
+          <p className="release-availability">{t("Android · 무료 다운로드 · 광고 포함")}</p>
           <a className="text-link" href="#classes">
             {t("나의 힐러 다시 살펴보기")} <Arrow />
           </a>
