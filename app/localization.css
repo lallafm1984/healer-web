@@ -12,25 +12,17 @@ html:lang(en) .landing .hero h1 {max-width:15ch}
 .site-footer .footer-links a {display:inline-flex;align-items:center;min-height:44px;font-size:14px}
 .site-footer .footer-bottom {font-size:12px;line-height:1.9}
 .page-top h1 {overflow-wrap:break-word}
-.document-layout>*,.deletion-layout>*,.support-content>* {min-width:0}
+.document-layout>*,.support-content>* {min-width:0}
 .document-body {font-size:16px;line-height:1.95}
 .document-body h2 {font-size:24px;line-height:1.6}
 .document-body :is(td,th) {font-size:14px;line-height:1.8;overflow-wrap:anywhere}
-.document-nav nav a,.aside-help {font-size:14px}
-.request-card p,.info-panel p,.numbered-steps li,.support-contact p:not(.eyebrow),.support-quicklinks p,.faq details>p {font-size:16px;line-height:1.9}
-.info-panel h3,.faq summary {font-size:16px}
-.request-card .form-note,.composer .sensitive-note,.support-fineprint,.operator-note,.updated {font-size:12px;line-height:1.9}
+.document-nav nav a,.aside-help {font-size:14px}.support-contact p:not(.eyebrow),.support-quicklinks p,.faq details>p {font-size:16px;line-height:1.9}.faq summary {font-size:16px}.support-fineprint,.updated {font-size:12px;line-height:1.9}
 .copy-button {min-height:44px;font-size:14px}
-.composer label {font-size:15px}
-.composer :is(input,select,textarea) {font-size:16px}
-.composer textarea[readonly] {font-size:14px}
 .page-top p:not(.eyebrow) {font-size:16px;line-height:1.9}
 @media(max-width:600px) {
   html:lang(en) .landing .class-tabs {grid-template-columns:repeat(3,minmax(0,1fr))}
   html:lang(en) .landing .hero h1 {font-size:38px}
   .document-body h2 {font-size:21px}
-  .document-body :is(td,th) {font-size:13px;padding:10px 8px}
-  .request-card .button,.contact-actions .button {font-size:14px;min-height:48px}
-  .support-email,.request-card .email-display {font-size:14px;overflow-wrap:anywhere}
-  .info-panel h2,.request-card h2 {font-size:22px}
+  .document-body :is(td,th) {font-size:13px;padding:10px 8px}.contact-actions .button {font-size:14px;min-height:48px}
+  .support-email{font-size:14px;overflow-wrap:anywhere}
 }

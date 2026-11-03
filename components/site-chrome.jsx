@@ -102,7 +102,6 @@ export default function SiteChrome({ children }) {
           <Link href={href("/#gameplay")}>{t("플레이")}</Link>
           <Link href={href("/support/")}>{t("고객지원")}</Link>
           <Link href={href("/privacy/")}>{t("개인정보처리방침")}</Link>
-          <Link href={href("/delete-account/")}>{t("계정 및 데이터 삭제")}</Link>
           <LanguageSwitcher />
         </nav>
         {landing && <div className="reading-progress" aria-hidden="true" />}
@@ -119,7 +118,6 @@ export default function SiteChrome({ children }) {
           <div className="footer-links">
             <Link href={href("/privacy/")}>{t("개인정보처리방침")}</Link>
             <Link href={href("/terms/")}>{t("이용약관")}</Link>
-            <Link href={href("/delete-account/")}>{t("계정 및 데이터 삭제")}</Link>
             <Link href={href("/support/")}>{t("고객지원")}</Link>
           </div>
         </div>

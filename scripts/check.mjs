@@ -3,7 +3,7 @@ import { spawn } from "node:child_process";
 import { createServer } from "node:net";
 import { once } from "node:events";
 
-const routes = ["/", "/privacy/", "/terms/", "/delete-account/", "/support/"];
+const routes = ["/", "/privacy/", "/terms/", "/support/"];
 let server;
 let serverLog = "";
 let baseUrl = process.env.CHECK_BASE_URL;
@@ -125,6 +125,10 @@ try {
   assert.equal(missing.status, 404);
   assert(missing.body.includes("길을 잠시 벗어났습니다."));
   assert(missing.body.includes("noindex"));
+  for (const lang of ["ko", "en", "ja"]) {
+    const removed = await read(new URL(`/delete-account/?lang=${lang}`, baseUrl).href);
+    assert.equal(removed.status, 404, `retired deletion page: ${lang}`);
+  }
   let localizedPages = 0;
   for (const lang of ["ko", "en", "ja"]) {
     for (const route of routes) {
@@ -150,12 +154,7 @@ try {
         if (/href[Ll]ang=/.test(tag)) continue;
         assert.equal(new URL(path.replaceAll("&amp;", "&"), baseUrl).searchParams.get("lang"), lang, `${route}: ${path}`);
       }
-      if (route === "/delete-account/") {
-        for (const [, address] of html.matchAll(/href="(mailto:[^\"]*)"/g)) {
-          const mail = new URL(address.replaceAll("&amp;", "&"));
-          if (lang !== "ko") assert(!/[가-힣]/.test((mail.searchParams.get("subject") || "") + (mail.searchParams.get("body") || "")));
-        }
-      }
+      assert(!html.includes("/delete-account/"), `${route}: no retired account link`);
       localizedPages++;
     }
   }
@@ -164,7 +163,7 @@ try {
     assert.equal(response.headers.get("content-language"), expected, "invalid query uses saved or primary browser language");
   }
   console.log(
-    `Passed: ${routes.length} pages, ${references} local references, SEO, security, sitemap, 404; ${localizedPages} localized pages, query priority, fallback, internal links and email drafts.`,
+    `Passed: ${routes.length} pages, ${references} local references, SEO, security, sitemap, 404; ${localizedPages} localized pages, query priority, fallback, internal links and retired-route checks.`,
   );
 } finally {
   if (server && server.exitCode === null) {

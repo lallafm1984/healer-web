@@ -3,7 +3,7 @@ import { legalSections } from "../../lib/legal-content";
 import { getLocale, localizedMetadata } from "../../lib/locale-server";
 export const generateMetadata = () => localizedMetadata(
   "이용약관",
-  "나혼자 힐러(Solo Healer) 서비스 이용, 계정, 구매, 탈퇴 및 지원 안내.",
+  "나혼자 힐러(Solo Healer) 서비스 이용, 저장, 구매 및 지원 안내.",
   "/terms/",
 );
 export default async function TermsPage() {

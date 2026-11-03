@@ -542,7 +542,7 @@ export default function HomeExperience() {
         <div className="container reveal">
           <div>
             <h2>{t("모험 중 도움이 필요할 때.")}</h2>
-            <p>{t("게임 문의부터 계정과 개인정보 관리까지.")}</p>
+            <p>{t("게임 문의부터 개인정보 지원까지.")}</p>
           </div>
           <a className="button outline" href={href("/support/")}>
             {t("고객지원")} <Arrow />
