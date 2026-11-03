@@ -4,7 +4,6 @@ import { browserLanguage, localizedHref, resolveLanguage } from "../lib/locale.j
 import { createLocale } from "../lib/translate.js";
 import { classes } from "../lib/content.js";
 import { legalSections } from "../lib/legal-content.js";
-import { deletionEmail } from "../lib/deletion-email.js";
 
 test("app query language wins over a different stored and device language", () => {
   for (const language of ["ko", "en", "ja"]) {
@@ -39,16 +38,10 @@ test("both translations cover every healer field and every policy section", () =
     }
   }
 });
-test("localized request drafts preserve user input, scope, and email contents", () => {
-  for (const lang of ["ko", "en", "ja"]) {
-    const { t } = createLocale(lang);
-    const request = deletionEmail(t, "rights", "tester@example.com", "A name & 日本語 <test>");
-    assert(request.body.includes("tester@example.com"));
-    assert(request.body.includes("A name & 日本語 <test>"));
-    assert(request.subject.includes(t("개인정보 열람·삭제 등 권리 행사 문의")));
-    const url = new URL(request.url);
-    assert.equal(url.searchParams.get("subject"), request.subject);
-    assert.equal(url.searchParams.get("body"), request.body);
-    if (lang !== "ko") assert(!/[가-힣]/.test(request.subject + request.body));
+test("current legal documents describe anonymous auth and local progress without account-management links", () => {
+  for (const lang of ["ko", "en", "ja"]) for (const kind of ["privacy", "terms"]) {
+    const sections = legalSections(kind, createLocale(lang));
+    assert(!JSON.stringify(sections).includes("/delete-account/"));
+    if (kind === "privacy") assert(JSON.stringify(sections).includes("Supabase"));
   }
 });
