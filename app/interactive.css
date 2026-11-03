@@ -43,8 +43,6 @@ html:has(.landing) {scrollbar-color:#97a778 #101e1e;scrollbar-gutter:stable;care
 .landing .hero h1 em {color:#ebcc91}
 .landing .hero-description {margin-top:28px;font-size:17px;line-height:1.95;color:#dce6d5;max-width:37ch}
 .landing .hero-actions {display:flex;align-items:center;flex-wrap:wrap;gap:20px 28px;margin-top:30px}
-.landing .hero-actions .button {min-width:224px;padding:15px 22px;min-height:54px;justify-content:space-between;font-size:15px}
-.landing .hero-actions .button>svg:last-child {margin:0;width:20px;height:20px}
 .landing .hero-meta {display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;margin:24px 0 0;font-size:12px;line-height:1.8;color:#cbd8c4}
 .landing .hero-meta i {width:3px;height:3px;background:#d5bb83;border-radius:50%}
 .landing .hero-preview {display:flex;position:relative;inset:auto;width:100%;flex-direction:column;align-items:center;z-index:2;padding:0;border:0;background:transparent;color:inherit;text-align:center;cursor:zoom-in;transform:translate3d(calc(var(--pointer-x,0px) * -.35),calc(var(--pointer-y,0px) * -.35),0);transition:transform .5s var(--motion-ease)}
@@ -145,8 +143,7 @@ html:has(.landing) {scrollbar-color:#97a778 #101e1e;scrollbar-gutter:stable;care
 .landing .release h2 {margin:0 0 24px;font-size:44px;line-height:1.5}
 .landing .release-content>p {font-size:16px;color:#d6e0cf}
 .landing .release-description {max-width:44ch;margin:16px 0 0;line-height:1.9}
-.landing .release-download {margin-top:26px;min-height:54px;padding:15px 24px;gap:20px;font-size:15px}
-.landing .release-content .release-availability {margin:14px 0 0;font-size:14px;line-height:1.8}
+.landing .release-content .release-availability {margin:0;font-size:14px;line-height:1.8}
 .landing .release .text-link {margin-top:22px}
 .landing dialog {width:min(620px,calc(100vw - 32px));height:min(900px,calc(100svh - 32px));height:min(900px,calc(100dvh - 32px));max-width:none;max-height:none;margin:auto;padding:0;border-radius:12px;overflow:hidden;background:#0b1c19}
 .landing dialog[open] {display:grid;grid-template-rows:auto minmax(0,1fr) auto}
@@ -206,7 +203,6 @@ html.motion-off {scroll-behavior:auto}
   .landing .hero-pretitle{font-size:20px}
   .landing .hero-description{font-size:16px}
   .landing .hero-actions{flex-direction:column;align-items:flex-start;gap:12px}
-  .landing .hero-actions .button{min-width:214px}
   .landing .hero-phone{width:190px}
   .landing .hero-preview-caption{font-size:12px;gap:7px}
   .landing .chapter-nav a{flex:1;min-width:0;padding-inline:15px}
@@ -240,8 +236,6 @@ html.motion-off {scroll-behavior:auto}
   .landing .hero-description{grid-column:1;grid-row:3;font-size:16px;line-height:1.9;margin:0;max-width:none}
   .landing .hero-description br{display:none}
   .landing .hero-actions{grid-column:1;grid-row:4;width:100%;gap:8px;margin:0;align-items:stretch}
-  .landing .hero-actions .button{min-width:0;width:100%;min-height:52px;padding:12px;gap:8px;font-size:14px;justify-content:space-between}
-  .landing .hero-actions .button>svg:last-child{width:18px;height:18px}
   .landing .hero-actions .text-link{font-size:13px;justify-content:space-between;width:fit-content;max-width:100%}
   .landing .hero-meta{grid-column:1 / -1;grid-row:5;gap:6px 9px;margin:10px 0 0;font-size:12px;line-height:1.9}
   .landing .hero-preview{grid-column:2;grid-row:3 / span 2;width:116px;justify-self:end;align-self:center;transform:none}

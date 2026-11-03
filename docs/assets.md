@@ -1,5 +1,13 @@
 # 에셋 제작 정보
 
+## Google Play 공식 다운로드 배지 (2026-11-03)
+
+- 출처: [Google Partner Marketing Hub · Google Play 배지](https://partnermarketinghub.withgoogle.com/brands/google-play/google-play/lockups-icons-badges/?folder=86718).
+- 원본: `GetItOnGooglePlay_Badge_Web_color_Korean.svg`, `GetItOnGooglePlay_Badge_Web_color_English.svg`, `GetItOnGooglePlay_Badge_Print_color_Japanese.svg` (허브에 등록된 최신 일본어 SVG 파일명).
+- 저장: `public/assets/google-play/badge-{ko,en,ja}.svg`. Google이 제공한 검은색·컬러 로고 원본을 수정 없이 보관합니다.
+- 사용: `components/google-play-badge.jsx`. 선택 언어에 맞는 이미지와 스토어 `hl`을 사용합니다.
+- 공식 가이드에 따라 비율·색상·로고·문구를 유지하며, 표시 높이 28px 이상과 배지 높이 1/4 이상의 사방 여백을 확보합니다. 외부 이미지 서버에 의존하지 않고 사이트에서 직접 제공합니다.
+
 ## 새로 생성한 메인 일러스트
 
 - 도구: Codex 내장 `image_gen` (CLI 미사용)

@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { classes } from "../lib/content";
-import { googlePlayHref } from "../lib/game";
+import GooglePlayBadge from "./google-play-badge";
 import { Arrow, Expand } from "./icons";
 import { useLandingMotion } from "./use-landing-motion";
 import { useLocale } from "./locale-provider";
@@ -147,7 +147,7 @@ export default function HomeExperience() {
               {t("당신의 치유로 이어지는 우리 파티의 모험.")}
             </p>
             <div className="hero-actions">
-              <a className="button gold" href={googlePlayHref(lang)}>{t("Google Play에서 다운로드")} <Arrow /></a>
+              <GooglePlayBadge />
               <a className="text-link" href="#gameplay">{t("전투 살펴보기")} <Arrow /></a>
             </div>
             <div className="hero-meta">
@@ -574,9 +574,7 @@ export default function HomeExperience() {
           </h2>
           <p>{t("나혼자 힐러: 던전 레이드 RPG")}</p>
           <p className="release-description">{t("혼자서 파티의 힐러가 되어 탐험과 던전, 레이드에 도전하세요.")}</p>
-          <a className="button gold release-download" href={googlePlayHref(lang)}>
-            {t("Google Play에서 다운로드")} <Arrow />
-          </a>
+          <GooglePlayBadge className="release-download" />
           <p className="release-availability">{t("Android · 무료 다운로드 · 광고 포함")}</p>
           <a className="text-link" href="#classes">
             {t("나의 힐러 다시 살펴보기")} <Arrow />

@@ -1,0 +1,22 @@
+/* Unmodified Google artwork. Padding preserves at least 1/4 badge-height clear space. */
+.google-play-badge {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  width:240px;
+  max-width:100%;
+  padding:16px;
+  border-radius:4px;
+  line-height:0;
+}
+.google-play-badge img {display:block;width:100%;height:auto}
+.site-header .site-header-download {width:184px;padding:12px}
+.landing .hero-actions .google-play-badge {margin-left:-16px}
+.landing .release-download {margin-top:10px}
+.mobile-menu .google-play-badge {display:inline-flex;padding:16px;margin-left:-16px}
+.site-footer .footer-links {align-items:center}
+.site-footer .footer-links .google-play-badge {width:184px;padding:12px}
+@media(max-width:900px) {
+  .site-header .site-header-download {display:none}
+}
