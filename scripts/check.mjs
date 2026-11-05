@@ -2,8 +2,13 @@ import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
 import { once } from "node:events";
+import { publicRoutes as routes } from "../lib/routes.js";
+import { languages } from "../lib/locale.js";
+import { healerGuide, healerGuideImage } from "../lib/healer-guide.js";
 
-const routes = ["/", "/privacy/", "/terms/", "/support/"];
+function attributes(tag) {
+  return Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(([, key, value]) => [key.toLowerCase(), value.replaceAll("&amp;", "&")]));
+}
 let server;
 let serverLog = "";
 let baseUrl = process.env.CHECK_BASE_URL;
@@ -117,7 +122,18 @@ try {
   const robots = await read(new URL("/robots.txt", baseUrl).href);
   assert.equal(sitemap.status, 200);
   assert.equal(robots.status, 200);
-  assert.equal((sitemap.body.match(/<loc>/g) || []).length, routes.length);
+  const sitemapEntries = [...sitemap.body.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([, entry]) => entry);
+  assert.equal(sitemapEntries.length, routes.length * languages.length);
+  const sitemapLocations = sitemapEntries.map((entry) => entry.match(/<loc>(.*?)<\/loc>/)?.[1]);
+  assert.equal(new Set(sitemapLocations).size, sitemapLocations.length, "sitemap URLs are unique");
+  for (const route of routes) for (const language of languages) {
+    const entry = sitemapEntries.find((item) => {
+      const url = new URL(item.match(/<loc>(.*?)<\/loc>/)[1]);
+      return url.pathname === route && url.searchParams.get("lang") === language;
+    });
+    assert(entry, `sitemap includes self-canonical ${route} ${language}`);
+    for (const alternate of [...languages, "x-default"]) assert(entry.includes(`hreflang="${alternate}"`), `sitemap language alternative ${alternate}`);
+  }
   assert(robots.body.includes("Sitemap:"));
   const missing = await read(
     new URL("/this-page-does-not-exist/", baseUrl).href,
@@ -138,11 +154,36 @@ try {
         "Accept-Language": "fr-FR", Cookie: `healer-web.lang=${lang === "ko" ? "ja" : "ko"}`,
         "x-healer-web-language": lang === "ja" ? "ko" : "ja",
       } });
-      const html = (await response.text()).replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
+      const source = await response.text();
+      const html = source.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
       assert.equal(response.status, 200, `${route} ${lang}`);
       assert.equal(response.headers.get("content-language"), lang);
       assert(new RegExp(`<html\\b[^>]*\\slang="${lang}"(?:\\s|>)`).test(html), `${route}: initial HTML ${lang}`);
       assert(response.headers.get("set-cookie")?.includes(`healer-web.lang=${lang}`), "app choice updates saved web language");
+      const links = [...html.matchAll(/<link\b[^>]*>/g)].map(([tag]) => attributes(tag));
+      const canonical = new URL(links.find((link) => link.rel === "canonical").href);
+      assert.equal(canonical.pathname, route, `${route}: canonical path`);
+      assert.equal(canonical.searchParams.get("lang"), lang, `${route}: self-canonical language`);
+      for (const alternate of [...languages, "x-default"]) {
+        const link = links.find((item) => item.rel === "alternate" && item.hreflang === alternate);
+        assert(link, `${route}: hreflang ${alternate}`);
+        const target = new URL(link.href);
+        assert.equal(target.pathname, route, `${route}: language alternative path`);
+        assert.equal(target.searchParams.get("lang"), alternate === "x-default" ? null : alternate);
+      }
+      const metadata = [...html.matchAll(/<meta\b[^>]*>/g)].map(([tag]) => attributes(tag));
+      assert.equal(metadata.find((item) => item.property === "og:url").content, canonical.href, `${route}: canonical and OG URL agree`);
+      if (route === "/wow-healer/") {
+        assert(html.includes(healerGuide[lang].heading[0]), "localized guide heading is server rendered");
+        assert(html.includes(healerGuide[lang].independent), "independent-game disclosure is visible");
+        assert.equal(new URL(metadata.find((item) => item.property === "og:image").content).pathname, healerGuideImage);
+        const game = JSON.parse(source.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+        assert.equal(game["@type"], "VideoGame");
+        assert.equal(game.inLanguage, lang);
+        assert.equal(game.url, canonical.href);
+        assert.equal(new URL(game.sameAs).searchParams.get("id"), "com.solohealer.game");
+        assert.equal(new URL(game.sameAs).searchParams.get("hl"), lang);
+      }
       if (lang !== "ko") {
         const withoutNativeLanguageName = html.replace(/<a\b[^>]*\slang="ko"[^>]*>[\s\S]*?<\/a>/g, "");
         assert(!/[가-힣]/.test(withoutNativeLanguageName), `${route}: untranslated Korean in ${lang}`);

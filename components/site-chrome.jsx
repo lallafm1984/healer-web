@@ -14,6 +14,7 @@ export default function SiteChrome({ children }) {
   const header = useRef(null);
   const toggle = useRef(null);
   const landing = pathname === "/";
+  const guide = pathname.replace(/\/$/, "") === "/wow-healer";
   const { t, href } = useLocale();
   function goHome(event) {
     setMenuOpen(false);
@@ -43,7 +44,7 @@ export default function SiteChrome({ children }) {
     };
   }, [menuOpen]);
   return (
-    <div className={landing ? "landing" : undefined}>
+    <div className={landing || guide ? "landing" : undefined}>
       <a className="skip" href="#main">
         {t("본문 바로가기")}
       </a>
@@ -97,6 +98,7 @@ export default function SiteChrome({ children }) {
           }}
         >
           <Link href={href("/#story")}>{t("게임 소개")}</Link>
+          <Link href={href("/wow-healer/")}>{t("힐러를 위한 모험")}</Link>
           <Link href={href("/#classes")}>{t("7가지 직업")}</Link>
           <Link href={href("/#gameplay")}>{t("플레이")}</Link>
           <Link href={href("/support/")}>{t("고객지원")}</Link>
@@ -116,6 +118,7 @@ export default function SiteChrome({ children }) {
             </span>
           </Link>
           <div className="footer-links">
+            <Link href={href("/wow-healer/")}>{t("힐러를 위한 모험")}</Link>
             <GooglePlayBadge />
             <Link href={href("/privacy/")}>{t("개인정보처리방침")}</Link>
             <Link href={href("/terms/")}>{t("이용약관")}</Link>

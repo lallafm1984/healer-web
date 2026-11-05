@@ -6,6 +6,7 @@ import "./globals.css";
 import "./interactive.css";
 import "./localization.css";
 import "./store-badges.css";
+import "./healer-guide.css";
 const description =
   "Google Play 정식 출시. 탐험과 던전, 레이드에서 혼자 파티를 지키는 싱글 플레이 힐러 RPG. 지금 Android에서 나혼자 힐러를 만나보세요.";
 export async function generateMetadata() {
