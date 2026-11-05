@@ -22,13 +22,14 @@ npm run check
 npm run start
 ```
 
-`test`는 언어 우선순위·코드 판정·링크·정책 번역 구조를 검사합니다. `check`는 빌드된 앱을 임시 포트에서 실행하여 페이지·내부 링크·메타데이터·보안 헤더·사이트맵·404와 3개 언어의 12개 페이지, 초기 서버 언어·저장 언어 충돌·제거 경로를 검사한 뒤 종료합니다. 배포된 사이트는 `CHECK_BASE_URL=https://실제-주소 npm run check`로 검사할 수 있습니다.
+`test`는 언어 우선순위·코드 판정·링크·정책 번역 구조를 검사합니다. `check`는 빌드된 앱을 임시 포트에서 실행하여 페이지·내부 링크·메타데이터·보안 헤더·사이트맵·404와 3개 언어의 15개 페이지, self-canonical·hreflang·공유 URL·구조화 데이터, 초기 서버 언어·저장 언어 충돌·제거 경로를 검사한 뒤 종료합니다. 배포된 사이트는 `CHECK_BASE_URL=https://실제-주소 npm run check`로 검사할 수 있습니다.
 
 ## 페이지와 코드
 
 | 경로 | 내용 | 파일 |
 | --- | --- | --- |
 | `/` | 게임 소개, 7개 직업 선택, 플레이 갤러리·확대, 출시 안내 | `app/page.jsx`, `components/home-experience.jsx` |
+| `/wow-healer/` | WoW 힐러 이용자에게 실제 싱글 플레이 전투·성장·동료를 소개 | `app/wow-healer/page.jsx`, `components/healer-guide.jsx` |
 | `/privacy/` | 개인정보 처리 안내 | `app/privacy/page.jsx` |
 | `/terms/` | 이용약관 | `app/terms/page.jsx` |
 | `/support/` | 운영 이메일, 기기 저장 FAQ, 개인정보 안내 | `app/support/page.jsx` |
@@ -78,6 +79,8 @@ GitHub의 `lallafm1984/healer-web` 저장소를 Import합니다.
 - 앱은 `/privacy/?lang=ja`처럼 기존 경로에 `lang=ko|en|ja`를 전달합니다. 유효한 URL 언어가 저장된 웹 언어보다 우선하며, 페이지 내부 이동에서도 유지합니다.
 - 직접 선택한 웹 언어는 언어 코드만 담은 기능성 쿠키로 최대 180일 기억합니다. URL·저장 선택이 없으면 브라우저의 첫 번째 언어가 한국어·일본어일 때 해당 언어, 나머지는 영어를 표시합니다.
 - 영어·일본어 홈은 실제 해당 언어로 실행해 캡처한 사제·장비·길드 화면을 사용합니다.
+- 2026-11-05: `/wow-healer/?lang=ko|en|ja`는 기존 세계관의 독립 게임 소개입니다. 타 게임의 아트·로고를 사용하지 않으며 소개 일러스트와 실제 게임 화면을 구별합니다. 홈의 이미지 섹션, 모바일 메뉴, 푸터에서 연결됩니다.
+- 사이트맵은 5개 경로의 3개 언어별 self-canonical URL 15개와 상호 언어 대체 URL을 제공합니다. 새 소개 페이지는 독립적인 제목·설명·공유 이미지와 사실에 한정된 `VideoGame` 구조화 데이터를 서버에서 렌더링합니다. 검색 서비스의 등록·색인·순위는 별도로 확인해야 합니다.
 
 [Google Play·도메인 안내](./docs/google-play-and-domain.md) · [그림과 폰트 정보](./docs/assets.md) · [기존 디자인 검증 기록](./docs/interactive-redesign.md)
 

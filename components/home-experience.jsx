@@ -2,6 +2,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { classes } from "../lib/content";
 import GooglePlayBadge from "./google-play-badge";
+import HealerInvitation from "./healer-invitation";
 import { Arrow, Expand } from "./icons";
 import { useLandingMotion } from "./use-landing-motion";
 import { useLocale } from "./locale-provider";
@@ -287,6 +288,7 @@ export default function HomeExperience() {
           </div>
         </div>
       </section>
+      <HealerInvitation />
       <section id="classes" className="classes-section section">
         <div className="container">
           <div className="section-heading reveal">

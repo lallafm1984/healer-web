@@ -1,5 +1,13 @@
 # 에셋 제작 정보
 
+## 힐러 이용자를 위한 소개 페이지 (2026-11-05)
+
+- `public/assets/healer-guide/party-healing.webp`: Healer 프로젝트와 협업해 만든 신규 원본 소개 일러스트. 게임의 sanctuary/cathedral 아트만 세계관·화풍 참고로 사용했습니다. 타 게임의 캐릭터·로고·UI를 사용하지 않았습니다.
+- 내장 ImageGen 원본: `/Users/lim/.codex/generated_images/01a1ac0f-e783-7612-b3ec-4afd04e7f297/exec-6d11962a-75b6-43f0-9077-b589f5e02911.png`. 전달 원본은 `healer/나혼자힐러/리소스/wow-healer-web-20261105/hero-raid-healing-original.png`이며, 전달 JPEG를 1920×800 WebP(q86)로 최적화했습니다.
+- 정확한 프롬프트는 `public/assets/healer-guide/party-healing.prompt.txt`에 보관합니다. 페이지에는 ‘소개 일러스트’로 표시합니다.
+- `public/assets/healer-guide/raid-{ko,en,ja}.webp`: `healer/나혼자힐러/리소스/스토어-다국어-20261031-v1/업로드/{ko-KR,en-US,ja-JP}/phone/04-priest-raid20.png`의 실제 언어별 레이드 화면. 그림·문구를 추가하거나 삭제하지 않고 가로 540px WebP(q88)로 최적화했습니다.
+- 파티·장비·길드에는 기존 `public/assets/`의 언어별 실제 화면을 재사용합니다. 확대 보기에서 전체 화면을 확인할 수 있습니다.
+
 ## Google Play 공식 다운로드 배지 (2026-11-03)
 
 - 출처: [Google Partner Marketing Hub · Google Play 배지](https://partnermarketinghub.withgoogle.com/brands/google-play/google-play/lockups-icons-badges/?folder=86718).
