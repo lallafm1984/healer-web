@@ -65,6 +65,12 @@ try {
     }
     assert(ready, `Next.js did not become ready: ${serverLog}`);
   }
+  const appAds = await fetch(new URL("/app-ads.txt", baseUrl), {
+    redirect: "manual", headers: { "User-Agent": "Google-adstxt" },
+  });
+  assert.equal(appAds.status, 200, "app-ads.txt is directly available to the crawler");
+  assert.match(appAds.headers.get("content-type") || "", /^text\/plain\b/i, "app-ads.txt is plain text");
+  assert.equal((await appAds.text()).trim(), "google.com, pub-9163944262143117, DIRECT, f08c47fec0942fa0", "app-ads.txt matches the verified AdMob publisher account");
   let references = 0;
   for (const route of routes) {
     const url = new URL(route, baseUrl).href;
@@ -214,7 +220,7 @@ try {
     assert.equal(response.headers.get("content-language"), expected, "invalid query uses saved or primary browser language");
   }
   console.log(
-    `Passed: ${routes.length} pages, ${references} local references, SEO, security, sitemap, 404; ${localizedPages} localized pages, query priority, fallback, internal links and retired-route checks.`,
+    `Passed: app-ads.txt publisher verification; ${routes.length} pages, ${references} local references, SEO, security, sitemap, 404; ${localizedPages} localized pages, query priority, fallback, internal links and retired-route checks.`,
   );
 } finally {
   if (server && server.exitCode === null) {
