@@ -13,7 +13,7 @@
 - 출처: [Google Partner Marketing Hub · Google Play 배지](https://partnermarketinghub.withgoogle.com/brands/google-play/google-play/lockups-icons-badges/?folder=86718).
 - 원본: `GetItOnGooglePlay_Badge_Web_color_Korean.svg`, `GetItOnGooglePlay_Badge_Web_color_English.svg`, `GetItOnGooglePlay_Badge_Print_color_Japanese.svg` (허브에 등록된 최신 일본어 SVG 파일명).
 - 저장: `public/assets/google-play/badge-{ko,en,ja}.svg`. Google이 제공한 검은색·컬러 로고 원본을 수정 없이 보관합니다.
-- 사용: `components/google-play-badge.jsx`. 선택 언어에 맞는 이미지와 스토어 `hl`을 사용합니다.
+- 사용: `components/store-links.jsx`. 선택 언어에 맞는 이미지와 스토어 `hl`을 사용합니다.
 - 공식 가이드에 따라 비율·색상·로고·문구를 유지하며, 표시 높이 28px 이상과 배지 높이 1/4 이상의 사방 여백을 확보합니다. 외부 이미지 서버에 의존하지 않고 사이트에서 직접 제공합니다.
 
 ## 새로 생성한 메인 일러스트
@@ -42,3 +42,10 @@ Use case: stylized-concept. Asset type: panoramic official landing page backgrou
 외부 스톡 사진, 가짜 리뷰·다운로드 수·평점, 다른 게임 이미지는 사용하지 않았습니다.
 
 2026-10-31: 전투 화면은 사제로 통일했습니다. 홈 첫 화면·플레이 갤러리·확대 화면이 `screenshot-battle-priest.webp`를 공유합니다.
+
+## App Store 공식 배지 (2026-11-14)
+
+- 출처: [Apple App Store Marketing Tools](https://toolbox.marketingtools.apple.com/)의 검은색 다운로드 배지, 언어 `ko-kr`, `en-us`, `ja-jp`.
+- 원본: `https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/{locale}`.
+- 파일: `public/assets/app-store/badge-ko.svg`, `badge-en.svg`, `badge-ja.svg`. 공식 SVG 원본을 수정하지 않고 사용합니다.
+- [Apple 마케팅 가이드](https://developer.apple.com/app-store/marketing/guidelines/)에 따라 비율·여백을 유지하고 App Store 배지를 먼저 배치합니다.

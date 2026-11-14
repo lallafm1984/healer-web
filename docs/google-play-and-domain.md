@@ -1,4 +1,11 @@
-# Google Play 등록과 도메인 연결
+# 앱 스토어 등록과 도메인 연결
+
+## App Store·Google Play 동시 안내 (2026-11-14, 한국 시간)
+
+- 공개 iPhone 스토어: [App Store](https://apps.apple.com/app/id6832173570), 앱 ID `6832173570`. 공개 등록정보의 앱명은 한국어 `나혼자 힐러`, 영어 `Solo Healer`, 일본어 `ソロヒーラー`입니다.
+- 공개 등록정보에서 iPhone 지원과 무료·앱 내 구입 표시를 확인했습니다. Android 링크는 기존 [Google Play](https://play.google.com/store/apps/details?id=com.solohealer.game)를 유지합니다.
+- 홈·힐러 소개의 다운로드 영역, 상단·모바일 메뉴·푸터에 두 스토어 링크를 제공합니다. App Store 링크는 국가를 고정하지 않고 `l=ko|en-US|ja`로 언어를 전달합니다.
+- 3개 언어의 출시·지원 기기 문구, 검색·공유 설명과 소개 페이지의 `VideoGame.gamePlatform`·`sameAs`를 두 플랫폼으로 갱신했습니다.
 
 ## Google Play 정식 출시 반영 (2026-11-03, 한국 시간)
 

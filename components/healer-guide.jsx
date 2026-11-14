@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { guideScreenshot, healerGuideImage } from "../lib/healer-guide";
 import { localizedHref } from "../lib/locale";
-import GooglePlayBadge from "./google-play-badge";
+import StoreLinks from "./store-links";
 import { Arrow, Expand } from "./icons";
 
 function Lines({ lines }) {
@@ -48,7 +48,7 @@ export default function HealerGuide({ copy, language }) {
             <h1 id="guide-title"><Lines lines={copy.heading} /></h1>
             <p className="guide-lead">{copy.lead}</p>
             <div className="guide-hero-actions">
-              <GooglePlayBadge />
+              <StoreLinks />
               <a className="text-link" href="#healing-decisions">{copy.explore}<Arrow /></a>
             </div>
             <p className="guide-independent">{copy.independent}</p>
@@ -103,7 +103,7 @@ export default function HealerGuide({ copy, language }) {
           <img src="/assets/app-icon.png" width="72" height="72" alt="" loading="lazy" />
           <h2 id="guide-final-title"><Lines lines={copy.finalHeading} /></h2>
           <p>{copy.finalText}</p>
-          <GooglePlayBadge />
+          <StoreLinks />
           <p className="guide-platform">{copy.platform}</p>
           <a className="text-link" href={localizedHref("/#gameplay", language)}>{copy.homeLink}<Arrow /></a>
         </div>

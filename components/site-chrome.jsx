@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { email } from "../lib/content";
-import GooglePlayBadge from "./google-play-badge";
+import StoreLinks from "./store-links";
 import { Arrow } from "./icons";
 import { useLocale } from "./locale-provider";
 import LanguageSwitcher from "./language-switcher";
@@ -74,7 +74,7 @@ export default function SiteChrome({ children }) {
               {t("고객지원")}
             </Link>
           </nav>
-          <GooglePlayBadge className="site-header-download" />
+          <StoreLinks className="site-header-download" compact />
           <button
             ref={toggle}
             className="menu-toggle"
@@ -102,7 +102,7 @@ export default function SiteChrome({ children }) {
           <Link href={href("/#classes")}>{t("7가지 직업")}</Link>
           <Link href={href("/#gameplay")}>{t("플레이")}</Link>
           <Link href={href("/support/")}>{t("고객지원")}</Link>
-          <GooglePlayBadge />
+          <StoreLinks compact />
           <Link href={href("/privacy/")}>{t("개인정보처리방침")}</Link>
           <LanguageSwitcher />
         </nav>
@@ -119,7 +119,7 @@ export default function SiteChrome({ children }) {
           </Link>
           <div className="footer-links">
             <Link href={href("/wow-healer/")}>{t("힐러를 위한 모험")}</Link>
-            <GooglePlayBadge />
+            <StoreLinks compact />
             <Link href={href("/privacy/")}>{t("개인정보처리방침")}</Link>
             <Link href={href("/terms/")}>{t("이용약관")}</Link>
             <Link href={href("/support/")}>{t("고객지원")}</Link>

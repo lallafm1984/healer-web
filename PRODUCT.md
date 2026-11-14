@@ -12,7 +12,7 @@ Prospective Solo Healer players and existing players seeking support. The 2026-1
 
 ## Product Purpose
 
-The official 4LTree website introduces Solo Healer, shows real gameplay, links to its published Android Google Play listing, and provides support and service policies in Korean, English, and Japanese.
+The official 4LTree website introduces Solo Healer, shows real gameplay, links to its published iPhone App Store and Android Google Play listings, and provides support and service policies in Korean, English, and Japanese.
 
 ## Positioning
 
@@ -20,7 +20,7 @@ Solo Healer is an independent single-player RPG about keeping a party alive thro
 
 ## Capabilities and Constraints
 
-- Public Android listing: `com.solohealer.game`. Download links use the official localized Google Play badge.
+- Public iPhone listing: `6832173570`. Public Android listing: `com.solohealer.game`. Primary download links use official localized App Store and Google Play badges; navigation uses text links to both stores.
 - Exploration, dungeons, raids, equipment/talents, and recruitment/development of game companions are established product content.
 - Class availability and purchases depend on the shipped version and progression. Do not promise a fixed number of free classes.
 - Locale priority is valid URL `lang` → stored choice → primary browser language. Supported codes are exactly `ko`, `en`, `ja`.
@@ -33,8 +33,8 @@ Preserve the existing Solo Healer identity, original fantasy world, official sto
 
 ## Evidence on Hand
 
-`README.md`, the public Google Play listing, `public/assets/` actual localized gameplay screenshots, and the original party-healing illustration supplied by the cooperating Healer project. Illustration and gameplay must be identified accurately. Do not use World of Warcraft artwork or logos as Solo Healer assets.
+`README.md`, the public App Store and Google Play listings, `public/assets/` actual localized gameplay screenshots, and the original party-healing illustration supplied by the cooperating Healer project. Illustration and gameplay must be identified accurately. Do not use World of Warcraft artwork or logos as Solo Healer assets.
 
 ## Open Decisions
 
-Future iOS availability, release schedules, and search ranking outcomes are not established. This product record captures the explicit brief and existing source evidence; it does not create a standing visual-workflow preference.
+The iPhone App Store listing was verified publicly available on 2026-11-14. Future release schedules and search ranking outcomes are not established. This product record captures the explicit brief and existing source evidence; it does not create a standing visual-workflow preference.

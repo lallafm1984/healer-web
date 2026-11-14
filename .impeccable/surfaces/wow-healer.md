@@ -4,7 +4,7 @@ Scope: `/wow-healer/` and its image-led homepage invitation. Visitor mode: Persu
 
 Audience: people who remember playing a healer in WoW / World of Warcraft and want to understand this independent mobile game's actual healing play.
 
-Action: inspect the real gameplay and follow the official localized Google Play badge.
+Action: inspect the real gameplay and follow the official localized App Store or Google Play badge.
 
 Established world: inherit the incumbent sanctuary, hand-painted stone/forest imagery, teal surfaces, warm gold emphasis, Hahmlet headings, Noto body text, existing header/footer, and official badges. This extends the site and does not replace its identity.
 

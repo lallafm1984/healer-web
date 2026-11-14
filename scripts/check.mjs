@@ -5,6 +5,7 @@ import { once } from "node:events";
 import { publicRoutes as routes } from "../lib/routes.js";
 import { languages } from "../lib/locale.js";
 import { healerGuide, healerGuideImage } from "../lib/healer-guide.js";
+import { appStoreHref, googlePlayHref } from "../lib/game.js";
 
 function attributes(tag) {
   return Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map(([, key, value]) => [key.toLowerCase(), value.replaceAll("&amp;", "&")]));
@@ -173,6 +174,15 @@ try {
       }
       const metadata = [...html.matchAll(/<meta\b[^>]*>/g)].map(([tag]) => attributes(tag));
       assert.equal(metadata.find((item) => item.property === "og:url").content, canonical.href, `${route}: canonical and OG URL agree`);
+      const storeLinks = [...html.matchAll(/<a\b[^>]*>/g)].map(([tag]) => attributes(tag));
+      for (const storeHref of [appStoreHref(lang), googlePlayHref(lang)]) {
+        assert(storeLinks.some((link) => link.href === storeHref && link["aria-label"]), `${route} ${lang}: accessible localized store link ${storeHref}`);
+      }
+      if (route === "/" || route === "/wow-healer/") {
+        assert(html.includes(`/assets/app-store/badge-${lang}.svg`), `${route} ${lang}: App Store badge`);
+        assert(html.includes(`/assets/google-play/badge-${lang}.svg`), `${route} ${lang}: Google Play badge`);
+        assert(metadata.find((item) => item.name === "description").content.includes("iPhone"), `${route} ${lang}: iPhone availability in search description`);
+      }
       if (route === "/wow-healer/") {
         assert(html.includes(healerGuide[lang].heading[0]), "localized guide heading is server rendered");
         assert(html.includes(healerGuide[lang].independent), "independent-game disclosure is visible");
@@ -181,8 +191,8 @@ try {
         assert.equal(game["@type"], "VideoGame");
         assert.equal(game.inLanguage, lang);
         assert.equal(game.url, canonical.href);
-        assert.equal(new URL(game.sameAs).searchParams.get("id"), "com.solohealer.game");
-        assert.equal(new URL(game.sameAs).searchParams.get("hl"), lang);
+        assert.deepEqual(game.gamePlatform, ["iOS", "Android"]);
+        assert.deepEqual(game.sameAs, [appStoreHref(lang), googlePlayHref(lang)]);
       }
       if (lang !== "ko") {
         const withoutNativeLanguageName = html.replace(/<a\b[^>]*\slang="ko"[^>]*>[\s\S]*?<\/a>/g, "");

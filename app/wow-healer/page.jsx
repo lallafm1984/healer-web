@@ -2,7 +2,7 @@ import HealerGuide from "../../components/healer-guide";
 import { getLocale } from "../../lib/locale-server";
 import { pageMetadata, siteUrl } from "../../lib/site";
 import { localizedHref } from "../../lib/locale";
-import { googlePlayHref } from "../../lib/game";
+import { appStoreHref, googlePlayHref } from "../../lib/game";
 import { healerGuide, healerGuideImage, healerGuidePath } from "../../lib/healer-guide";
 
 export async function generateMetadata() {
@@ -25,9 +25,9 @@ export default async function HealerGuidePage() {
     name:t("나혼자 힐러: 던전 레이드 RPG"), description:copy.description,
     url:`${siteUrl}${localizedHref(healerGuidePath, lang)}`,
     image:`${siteUrl}${healerGuideImage}`, inLanguage:lang,
-    gamePlatform:"Android", playMode:"https://schema.org/SinglePlayer",
+    gamePlatform:["iOS", "Android"], playMode:"https://schema.org/SinglePlayer",
     author:{ "@type":"Organization", name:"4LTree", url:"https://www.4ltree.com/" },
-    sameAs:googlePlayHref(lang),
+    sameAs:[appStoreHref(lang), googlePlayHref(lang)],
   };
   return <><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(game).replaceAll("<", "\\u003c")}} /><HealerGuide copy={copy} language={lang} /></>;
 }

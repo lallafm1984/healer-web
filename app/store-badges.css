@@ -20,3 +20,31 @@
 @media(max-width:900px) {
   .site-header .site-header-download {display:none}
 }
+
+/* Official store artwork keeps its aspect ratio and 1/4-height clear space. */
+.store-links {display:flex;align-items:center;flex-wrap:wrap;gap:0;max-width:100%}
+.store-links-badges {margin-inline:-12px}
+.store-links-badges a {display:inline-flex;flex-shrink:0;align-items:center;justify-content:center;padding:12px;max-width:100%;line-height:0;border-radius:4px}
+.store-links-badges img {display:block;width:auto;height:48px;max-width:100%;border-radius:0;margin:0;box-shadow:none}
+.store-links-compact {gap:8px 20px}
+.store-links-compact a {display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:var(--gold-light);text-underline-offset:5px}
+.store-links-compact a:hover {text-decoration:underline}
+.site-header .store-links-compact {width:auto;padding:0;flex-shrink:0}
+.mobile-menu .store-links-compact {padding:8px 0}
+.mobile-menu .store-links-compact a {padding:8px 0}
+.landing .release-download {justify-content:center}
+.guide-hero-actions .store-links {margin-left:-12px}
+.guide-finale .store-links {justify-content:center}
+@media(max-width:1100px) {
+  .site-header .site-header-download {display:none}
+}
+@media(max-width:600px) {
+  .store-links-badges a {padding:10px}
+  .store-links-badges {margin-inline:-10px}
+  .store-links-badges img {height:40px}
+  .guide-hero-actions .store-links {margin-left:-10px}
+}
+@media(max-width:360px) {
+  .landing .hero-layout {grid-template-columns:minmax(0,1fr) 96px}
+  .landing .hero-preview,.landing .hero-phone {width:96px}
+}

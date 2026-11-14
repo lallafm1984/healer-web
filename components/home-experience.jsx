@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { classes } from "../lib/content";
-import GooglePlayBadge from "./google-play-badge";
+import StoreLinks from "./store-links";
 import HealerInvitation from "./healer-invitation";
 import { Arrow, Expand } from "./icons";
 import { useLandingMotion } from "./use-landing-motion";
@@ -148,12 +148,12 @@ export default function HomeExperience() {
               {t("당신의 치유로 이어지는 우리 파티의 모험.")}
             </p>
             <div className="hero-actions">
-              <GooglePlayBadge />
+              <StoreLinks />
               <a className="text-link" href="#gameplay">{t("전투 살펴보기")} <Arrow /></a>
             </div>
             <div className="hero-meta">
-              <span>Android</span><i aria-hidden="true" /><span>{t("싱글 플레이 RPG")}</span>
-              <i aria-hidden="true" /><span>{t("Google Play 정식 출시")}</span>
+              <span>iPhone · Android</span><i aria-hidden="true" /><span>{t("싱글 플레이 RPG")}</span>
+              <i aria-hidden="true" /><span>{t("App Store · Google Play 정식 출시")}</span>
             </div>
           </div>
           <button
@@ -576,8 +576,8 @@ export default function HomeExperience() {
           </h2>
           <p>{t("나혼자 힐러: 던전 레이드 RPG")}</p>
           <p className="release-description">{t("혼자서 파티의 힐러가 되어 탐험과 던전, 레이드에 도전하세요.")}</p>
-          <GooglePlayBadge className="release-download" />
-          <p className="release-availability">{t("Android · 무료 다운로드 · 광고 포함")}</p>
+          <StoreLinks className="release-download" />
+          <p className="release-availability">{t("iPhone · Android · 무료 다운로드 · 광고 및 앱 내 구입 포함")}</p>
           <a className="text-link" href="#classes">
             {t("나의 힐러 다시 살펴보기")} <Arrow />
           </a>
